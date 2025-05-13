@@ -18,4 +18,6 @@ public class Pet {
     private String petWeight;
     private String birthDate;
 
+    @ManyToOne
+    private Doctor doctor;
 }
