@@ -20,4 +20,7 @@ public class Pet {
 
     @ManyToOne
     private Doctor doctor;
+
+    @ManyToOne
+    private PetOwner petOwner;
 }
