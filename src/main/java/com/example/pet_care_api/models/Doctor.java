@@ -18,8 +18,9 @@ public class Doctor {
     private int phoneNumber;
 
     @ManyToOne
+    @JoinColumn(name = "petShop_id")
     private PetShop petShop;
 
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Pet> pets;
 }

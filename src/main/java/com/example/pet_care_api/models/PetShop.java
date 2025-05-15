@@ -17,6 +17,6 @@ public class PetShop {
     private String shopAddress;
     private String shopPhoneNumber;
 
-    @OneToMany(mappedBy = "petShop")
+    @OneToMany(mappedBy = "petShop", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Doctor> doctors;
 }

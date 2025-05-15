@@ -19,8 +19,10 @@ public class Pet {
     private String birthDate;
 
     @ManyToOne
+    @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
     @ManyToOne
+    @JoinColumn(name = "petOwner_id")
     private PetOwner petOwner;
 }
