@@ -25,4 +25,8 @@ public class Pet {
     @ManyToOne
     @JoinColumn(name = "petOwner_id")
     private PetOwner petOwner;
+
+    @ManyToOne
+    @JoinColumn(name = "petCategoryId")
+    private PetCategory petCategory;
 }
