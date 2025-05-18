@@ -26,6 +26,6 @@ public class Pet {
     private PetOwner petOwner;
 
     @ManyToOne
-    @JoinColumn(name = "petCategoryId")
+    @JoinColumn(name = "petCategory_id")
     private PetCategory petCategory;
 }

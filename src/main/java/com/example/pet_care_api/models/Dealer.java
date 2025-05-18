@@ -24,5 +24,5 @@ public class Dealer {
     private List<Order> orders;
 
     @ManyToMany(mappedBy = "dealers",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<PetShop> petShops;
+    private List<PetClinic> petClinics;
 }

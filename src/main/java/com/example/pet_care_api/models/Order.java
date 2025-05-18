@@ -19,6 +19,6 @@ public class Order {
     private OrderStatus orderStatus;
 
     @ManyToOne
-    @JoinColumn(name = "dealerId")
+    @JoinColumn(name = "dealer_id")
     private Dealer dealer;
 }

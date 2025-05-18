@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "pet-shops")
-public class PetShop {
+public class PetClinic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,13 +17,13 @@ public class PetShop {
     private String address;
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "petShop", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "petClinic", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Doctor> doctors;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(
             name = "petShop_dealer",
-            joinColumns = @JoinColumn(name = "petShopId"),
+            joinColumns = @JoinColumn(name = "petClinicId"),
             inverseJoinColumns = @JoinColumn(name = "dealerId")
     )
     private List<Dealer> dealers;
