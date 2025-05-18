@@ -12,7 +12,7 @@ public class PetCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String categoryName;
 
     @OneToMany(mappedBy = "petCategory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

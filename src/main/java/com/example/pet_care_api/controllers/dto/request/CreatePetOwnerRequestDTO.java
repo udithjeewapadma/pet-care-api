@@ -8,7 +8,7 @@ import lombok.Data;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class CreatePetOwnerRequestDTO {
 
-    private String userName;
+    private String ownerName;
     private String address;
     private String phoneNumber;
 }

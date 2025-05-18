@@ -17,7 +17,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
     public PetOwner createPetOwner(CreatePetOwnerRequestDTO createPetOwnerRequestDTO) {
 
         PetOwner petOwner = new PetOwner();
-        petOwner.setUserName(createPetOwnerRequestDTO.getUserName());
+        petOwner.setOwnerName(createPetOwnerRequestDTO.getOwnerName());
         petOwner.setAddress(createPetOwnerRequestDTO.getAddress());
         petOwner.setPhoneNumber(createPetOwnerRequestDTO.getPhoneNumber());
 

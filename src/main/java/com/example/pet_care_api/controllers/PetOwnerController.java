@@ -23,7 +23,7 @@ public class PetOwnerController {
 
         PetOwnerResponseDTO petOwnerResponseDTO = new PetOwnerResponseDTO();
         petOwnerResponseDTO.setId(petOwner.getId());
-        petOwnerResponseDTO.setUserName(petOwner.getUserName());
+        petOwnerResponseDTO.setOwnerName(petOwner.getOwnerName());
         petOwnerResponseDTO.setAddress(petOwner.getAddress());
         petOwnerResponseDTO.setPhoneNumber(petOwner.getPhoneNumber());
         return petOwnerResponseDTO;

@@ -14,8 +14,8 @@ public class PetShop {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String shopName;
-    private String shopAddress;
-    private String shopPhoneNumber;
+    private String address;
+    private String phoneNumber;
 
     @OneToMany(mappedBy = "petShop", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Doctor> doctors;

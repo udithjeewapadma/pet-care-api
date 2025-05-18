@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class PetOwnerResponseDTO {
 
     private Long id;
-    private String userName;
+    private String ownerName;
     private String address;
     private String phoneNumber;
 }

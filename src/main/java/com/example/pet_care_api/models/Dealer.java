@@ -13,8 +13,8 @@ public class Dealer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String phone;
+    private String dealerName;
+    private String phoneNumber;
     private String email;
 
     @ManyToMany(mappedBy = "dealers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

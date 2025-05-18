@@ -13,9 +13,9 @@ public class Pharmacy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String pharmacyName;
     private String address;
-    private String phone;
+    private String phoneNumber;
     private String email;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
