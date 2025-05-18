@@ -17,4 +17,7 @@ public class PetCategory {
 
     @OneToMany(mappedBy = "petCategory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Pet> pets;
+
+    @OneToMany(mappedBy = "petCategory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Breed> breeds;
 }
