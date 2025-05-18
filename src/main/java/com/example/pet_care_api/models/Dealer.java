@@ -22,4 +22,7 @@ public class Dealer {
 
     @OneToMany(mappedBy = "dealer",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Order> orders;
+
+    @ManyToMany(mappedBy = "dealers",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PetShop> petShops;
 }
