@@ -9,6 +9,9 @@ import com.example.pet_care_api.service.PetOwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PetOwnerServiceImpl implements PetOwnerService {
 
@@ -39,5 +42,18 @@ public class PetOwnerServiceImpl implements PetOwnerService {
         petOwnerResponseDTO.setPhoneNumber(petOwner.getPhoneNumber());
 
         return petOwnerResponseDTO;
+    }
+
+    @Override
+    public List<PetOwnerResponseDTO> findAllPetOwners() {
+        List<PetOwner> petOwners = petOwnerRepository.findAll();
+        return petOwners.stream().map( petOwner -> {
+            PetOwnerResponseDTO petOwnerResponseDTO = new PetOwnerResponseDTO();
+            petOwnerResponseDTO.setId(petOwner.getId());
+            petOwnerResponseDTO.setOwnerName(petOwner.getOwnerName());
+            petOwnerResponseDTO.setAddress(petOwner.getAddress());
+            petOwnerResponseDTO.setPhoneNumber(petOwner.getPhoneNumber());
+            return petOwnerResponseDTO;
+        }).collect(Collectors.toList());
     }
 }
