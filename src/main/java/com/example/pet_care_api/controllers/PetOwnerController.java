@@ -45,4 +45,17 @@ public class PetOwnerController {
     public void deletePetOwnerById(@PathVariable("pet-owner-id") Long petOwnerId) {
         petOwnerService.deletePetOwnerById(petOwnerId);
     }
+
+    @PutMapping("/{pet-owner-id}")
+    public PetOwnerResponseDTO updatePetOwner(@PathVariable("pet-owner-id") Long id, @RequestBody CreatePetOwnerRequestDTO createPetOwnerRequestDTO) {
+
+        PetOwner petOwner = petOwnerService.updatePetOwner(id, createPetOwnerRequestDTO);
+        PetOwnerResponseDTO petOwnerResponseDTO = new PetOwnerResponseDTO();
+
+        petOwnerResponseDTO.setOwnerName(petOwner.getOwnerName());
+        petOwnerResponseDTO.setAddress(petOwner.getAddress());
+        petOwnerResponseDTO.setPhoneNumber(petOwner.getPhoneNumber());
+
+        return petOwnerResponseDTO;
+    }
 }

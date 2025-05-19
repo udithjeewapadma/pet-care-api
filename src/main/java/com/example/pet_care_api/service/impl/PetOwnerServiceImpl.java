@@ -61,4 +61,17 @@ public class PetOwnerServiceImpl implements PetOwnerService {
     public void deletePetOwnerById(Long id) {
         petOwnerRepository.deleteById(id);
     }
+
+    @Override
+    public PetOwner updatePetOwner(Long id, CreatePetOwnerRequestDTO createPetOwnerRequestDTO) {
+
+        PetOwner existingPetOwner = petOwnerRepository.findById(id)
+                .orElseThrow(() -> new PetOwnerNotFoundException("Pet Owner Not Found"));
+
+        existingPetOwner.setOwnerName(createPetOwnerRequestDTO.getOwnerName());
+        existingPetOwner.setAddress(createPetOwnerRequestDTO.getAddress());
+        existingPetOwner.setPhoneNumber(createPetOwnerRequestDTO.getPhoneNumber());
+
+        return petOwnerRepository.save(existingPetOwner);
+    }
 }
