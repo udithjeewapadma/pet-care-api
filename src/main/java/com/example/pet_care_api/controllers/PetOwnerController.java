@@ -40,4 +40,9 @@ public class PetOwnerController {
     public List<PetOwnerResponseDTO> getAllPetOwners() {
         return petOwnerService.findAllPetOwners();
     }
+
+    @DeleteMapping("/{pet-owner-id}")
+    public void deletePetOwnerById(@PathVariable("pet-owner-id") Long petOwnerId) {
+        petOwnerService.deletePetOwnerById(petOwnerId);
+    }
 }

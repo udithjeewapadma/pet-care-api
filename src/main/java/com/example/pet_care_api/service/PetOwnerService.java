@@ -13,4 +13,6 @@ public interface PetOwnerService {
     PetOwnerResponseDTO findPetOwnerById(Long id);
 
     List<PetOwnerResponseDTO> findAllPetOwners();
+
+    void deletePetOwnerById(Long id);
 }

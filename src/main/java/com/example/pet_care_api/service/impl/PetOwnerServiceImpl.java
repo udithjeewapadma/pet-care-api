@@ -56,4 +56,9 @@ public class PetOwnerServiceImpl implements PetOwnerService {
             return petOwnerResponseDTO;
         }).collect(Collectors.toList());
     }
+
+    @Override
+    public void deletePetOwnerById(Long id) {
+        petOwnerRepository.deleteById(id);
+    }
 }
