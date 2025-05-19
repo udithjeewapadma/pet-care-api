@@ -28,4 +28,9 @@ public class PetOwnerController {
         petOwnerResponseDTO.setPhoneNumber(petOwner.getPhoneNumber());
         return petOwnerResponseDTO;
     }
+
+    @GetMapping("/{pet-owner-id}")
+    public PetOwnerResponseDTO getPetOwnerById(@PathVariable("pet-owner-id") Long petOwnerId) {
+        return petOwnerService.findPetOwnerById(petOwnerId);
+    }
 }
