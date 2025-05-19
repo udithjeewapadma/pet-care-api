@@ -1,6 +1,8 @@
 package com.example.pet_care_api.service.impl;
 
 import com.example.pet_care_api.controllers.dto.request.CreateBreedRequestDTO;
+import com.example.pet_care_api.controllers.dto.response.BreedResponseDTO;
+import com.example.pet_care_api.exceptions.BreedNotFoundException;
 import com.example.pet_care_api.models.Breed;
 import com.example.pet_care_api.repositories.BreedRepository;
 import com.example.pet_care_api.service.BreedService;
@@ -18,5 +20,16 @@ public class BreedServiceImpl implements BreedService {
         Breed breed = new Breed();
         breed.setBreedName(createBreedRequestDTO.getBreedName());
         return breedRepository.save(breed);
+    }
+
+    @Override
+    public BreedResponseDTO getBreedById(Long id) {
+
+        Breed breed = breedRepository.findById(id)
+                .orElseThrow(() -> new BreedNotFoundException("Breed Not Found"));
+        BreedResponseDTO breedResponseDTO = new BreedResponseDTO();
+        breedResponseDTO.setId(breed.getId());
+        breedResponseDTO.setBreedName(breed.getBreedName());
+        return breedResponseDTO;
     }
 }

@@ -27,4 +27,9 @@ public class BreedController {
 
         return breedResponseDTO;
     }
+
+    @GetMapping("/{breed-id}")
+    public BreedResponseDTO getBreedById(@PathVariable("breed-id") Long breedId) {
+        return breedService.getBreedById(breedId);
+    }
 }
