@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/breeds")
 public class BreedController {
@@ -31,5 +33,10 @@ public class BreedController {
     @GetMapping("/{breed-id}")
     public BreedResponseDTO getBreedById(@PathVariable("breed-id") Long breedId) {
         return breedService.getBreedById(breedId);
+    }
+
+    @GetMapping
+    public List<BreedResponseDTO> getAllBreeds() {
+        return breedService.getAllBreeds();
     }
 }

@@ -9,6 +9,9 @@ import com.example.pet_care_api.service.BreedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class BreedServiceImpl implements BreedService {
     @Autowired
@@ -32,4 +35,17 @@ public class BreedServiceImpl implements BreedService {
         breedResponseDTO.setBreedName(breed.getBreedName());
         return breedResponseDTO;
     }
+
+    @Override
+    public List<BreedResponseDTO> getAllBreeds() {
+        List<Breed> breeds = breedRepository.findAll();
+        return breeds.stream().map(breed -> {
+            BreedResponseDTO breedResponseDTO = new BreedResponseDTO();
+            breedResponseDTO.setId(breed.getId());
+            breedResponseDTO.setBreedName(breed.getBreedName());
+            return breedResponseDTO;
+        }).collect(Collectors.toList());
+    }
+
+
 }
