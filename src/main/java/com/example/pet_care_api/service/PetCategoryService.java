@@ -15,4 +15,6 @@ public interface PetCategoryService {
     List<PetCategoryResponseDTO> getAllPetCategories();
 
     void deletePetCategoryById(Long id);
+
+    PetCategory updatePetCategory(Long id, CreatePetCategoryRequestDTO createPetCategoryRequestDTO);
 }

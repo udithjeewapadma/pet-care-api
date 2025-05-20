@@ -53,4 +53,13 @@ public class PetCategoryServiceImpl implements PetCategoryService {
     public void deletePetCategoryById(Long id) {
         petCategoryRepository.deleteById(id);
     }
+
+    @Override
+    public PetCategory updatePetCategory(Long id, CreatePetCategoryRequestDTO createPetCategoryRequestDTO) {
+
+        PetCategory existingPetCategory = petCategoryRepository.findById(id)
+                .orElseThrow( () -> new PetCategoryNotFoundException("Pet Category Not Found"));
+        existingPetCategory.setCategoryName(createPetCategoryRequestDTO.getCategoryName());
+        return petCategoryRepository.save(existingPetCategory);
+    }
 }
