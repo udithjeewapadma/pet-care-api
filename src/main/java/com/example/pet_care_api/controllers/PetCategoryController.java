@@ -36,4 +36,9 @@ public class PetCategoryController {
     private List<PetCategoryResponseDTO> getAllPetCategories() {
         return petCategoryService.getAllPetCategories();
     }
+
+    @DeleteMapping("/{pet-category-id}")
+    private void deletePetCategoryById(@PathVariable("pet-category-id") Long petCategoryId) {
+        petCategoryService.deletePetCategoryById(petCategoryId);
+    }
 }
