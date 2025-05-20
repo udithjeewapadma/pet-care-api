@@ -13,4 +13,6 @@ public interface PetCategoryService {
     PetCategoryResponseDTO findPetCategoryById(Long id);
 
     List<PetCategoryResponseDTO> getAllPetCategories();
+
+    void deletePetCategoryById(Long id);
 }

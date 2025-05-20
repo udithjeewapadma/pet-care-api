@@ -48,4 +48,9 @@ public class PetCategoryServiceImpl implements PetCategoryService {
             return petCategoryResponseDTO;
         }).collect(Collectors.toList());
     }
+
+    @Override
+    public void deletePetCategoryById(Long id) {
+        petCategoryRepository.deleteById(id);
+    }
 }
