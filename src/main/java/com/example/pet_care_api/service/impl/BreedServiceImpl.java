@@ -52,5 +52,15 @@ public class BreedServiceImpl implements BreedService {
         breedRepository.deleteById(id);
     }
 
+    @Override
+    public Breed updateBreeById(Long id, CreateBreedRequestDTO createBreedRequestDTO) {
+        Breed existingBreed = breedRepository.findById(id)
+                .orElseThrow(() -> new BreedNotFoundException("Breed Not Found"));
+
+        existingBreed.setBreedName(createBreedRequestDTO.getBreedName());
+        return breedRepository.save(existingBreed);
+
+    }
+
 
 }

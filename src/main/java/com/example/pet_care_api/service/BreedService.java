@@ -15,4 +15,6 @@ public interface BreedService {
     List<BreedResponseDTO> getAllBreeds();
 
     void deleteBreedById(Long id);
+
+    Breed updateBreeById(Long id, CreateBreedRequestDTO createBreedRequestDTO);
 }

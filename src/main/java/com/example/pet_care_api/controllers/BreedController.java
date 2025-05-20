@@ -45,4 +45,14 @@ public class BreedController {
         breedService.deleteBreedById(breedId);
     }
 
+    @PutMapping("/{breed-id}")
+    public BreedResponseDTO updateBreed(@PathVariable("breed-id") Long id,
+                                        @RequestBody CreateBreedRequestDTO createBreedRequestDTO) {
+
+        Breed breed = breedService.updateBreeById(id, createBreedRequestDTO);
+        BreedResponseDTO breedResponseDTO = new BreedResponseDTO();
+        breedResponseDTO.setBreedName(breed.getBreedName());
+        return breedResponseDTO;
+    }
+
 }
