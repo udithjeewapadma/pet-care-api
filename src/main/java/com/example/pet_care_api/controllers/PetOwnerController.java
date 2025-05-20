@@ -52,6 +52,7 @@ public class PetOwnerController {
         PetOwner petOwner = petOwnerService.updatePetOwner(id, createPetOwnerRequestDTO);
         PetOwnerResponseDTO petOwnerResponseDTO = new PetOwnerResponseDTO();
 
+        petOwnerResponseDTO.setId(petOwner.getId());
         petOwnerResponseDTO.setOwnerName(petOwner.getOwnerName());
         petOwnerResponseDTO.setAddress(petOwner.getAddress());
         petOwnerResponseDTO.setPhoneNumber(petOwner.getPhoneNumber());

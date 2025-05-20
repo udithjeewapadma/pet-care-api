@@ -41,4 +41,14 @@ public class PetCategoryController {
     private void deletePetCategoryById(@PathVariable("pet-category-id") Long petCategoryId) {
         petCategoryService.deletePetCategoryById(petCategoryId);
     }
+
+    @PutMapping("/{pet-category-id}")
+    private PetCategoryResponseDTO updatePetCategory(@PathVariable("pet-category-id") Long id,
+                                                     @RequestBody CreatePetCategoryRequestDTO createPetCategoryRequestDTO) {
+        PetCategory petCategory = petCategoryService.updatePetCategory(id, createPetCategoryRequestDTO);
+        PetCategoryResponseDTO petCategoryResponseDTO = new PetCategoryResponseDTO();
+        petCategoryResponseDTO.setId(petCategory.getId());
+        petCategoryResponseDTO.setCategoryName(petCategory.getCategoryName());
+        return petCategoryResponseDTO;
+    }
 }

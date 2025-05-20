@@ -51,6 +51,7 @@ public class BreedController {
 
         Breed breed = breedService.updateBreeById(id, createBreedRequestDTO);
         BreedResponseDTO breedResponseDTO = new BreedResponseDTO();
+        breedResponseDTO.setId(breed.getId());
         breedResponseDTO.setBreedName(breed.getBreedName());
         return breedResponseDTO;
     }
