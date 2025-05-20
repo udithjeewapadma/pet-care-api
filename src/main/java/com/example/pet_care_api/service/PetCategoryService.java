@@ -4,9 +4,13 @@ import com.example.pet_care_api.controllers.dto.request.CreatePetCategoryRequest
 import com.example.pet_care_api.controllers.dto.response.PetCategoryResponseDTO;
 import com.example.pet_care_api.models.PetCategory;
 
+import java.util.List;
+
 public interface PetCategoryService {
 
     PetCategory createPetCategory(CreatePetCategoryRequestDTO createPetCategoryRequestDTO);
 
     PetCategoryResponseDTO findPetCategoryById(Long id);
+
+    List<PetCategoryResponseDTO> getAllPetCategories();
 }
