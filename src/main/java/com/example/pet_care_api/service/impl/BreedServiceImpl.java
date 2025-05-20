@@ -3,8 +3,11 @@ package com.example.pet_care_api.service.impl;
 import com.example.pet_care_api.controllers.dto.request.CreateBreedRequestDTO;
 import com.example.pet_care_api.controllers.dto.response.BreedResponseDTO;
 import com.example.pet_care_api.exceptions.BreedNotFoundException;
+import com.example.pet_care_api.exceptions.PetCategoryNotFoundException;
 import com.example.pet_care_api.models.Breed;
+import com.example.pet_care_api.models.PetCategory;
 import com.example.pet_care_api.repositories.BreedRepository;
+import com.example.pet_care_api.repositories.PetCategoryRepository;
 import com.example.pet_care_api.service.BreedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,11 +20,18 @@ public class BreedServiceImpl implements BreedService {
     @Autowired
     private BreedRepository breedRepository;
 
+    @Autowired
+    private PetCategoryRepository petCategoryRepository;
+
     @Override
-    public Breed createBreed(CreateBreedRequestDTO createBreedRequestDTO) {
+    public Breed createBreed(Long petCategoryId, CreateBreedRequestDTO createBreedRequestDTO) {
+
+        PetCategory petCategory = petCategoryRepository.findById(petCategoryId)
+                .orElseThrow(() -> new PetCategoryNotFoundException("pet category not found"));
 
         Breed breed = new Breed();
         breed.setBreedName(createBreedRequestDTO.getBreedName());
+        breed.setPetCategory(petCategory);
         return breedRepository.save(breed);
     }
 
@@ -33,6 +43,7 @@ public class BreedServiceImpl implements BreedService {
         BreedResponseDTO breedResponseDTO = new BreedResponseDTO();
         breedResponseDTO.setId(breed.getId());
         breedResponseDTO.setBreedName(breed.getBreedName());
+        breedResponseDTO.setPetCategoryId(breed.getPetCategory().getId());
         return breedResponseDTO;
     }
 
@@ -43,6 +54,7 @@ public class BreedServiceImpl implements BreedService {
             BreedResponseDTO breedResponseDTO = new BreedResponseDTO();
             breedResponseDTO.setId(breed.getId());
             breedResponseDTO.setBreedName(breed.getBreedName());
+            breedResponseDTO.setPetCategoryId(breed.getPetCategory().getId());
             return breedResponseDTO;
         }).collect(Collectors.toList());
     }

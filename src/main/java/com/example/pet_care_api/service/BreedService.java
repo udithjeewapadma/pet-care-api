@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BreedService {
 
-    Breed createBreed(CreateBreedRequestDTO createBreedRequestDTO);
+    Breed createBreed(Long petCategoryId,CreateBreedRequestDTO createBreedRequestDTO);
 
     BreedResponseDTO getBreedById(Long id);
 

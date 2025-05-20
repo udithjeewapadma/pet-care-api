@@ -19,13 +19,15 @@ public class BreedController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public BreedResponseDTO createBreed(@RequestBody CreateBreedRequestDTO createBreedRequestDTO) {
+    public BreedResponseDTO createBreed(@RequestParam Long petCategoryId,@RequestBody CreateBreedRequestDTO createBreedRequestDTO) {
 
-        Breed breed = breedService.createBreed(createBreedRequestDTO);
+        Breed breed = breedService.createBreed(petCategoryId,createBreedRequestDTO);
 
         BreedResponseDTO breedResponseDTO = new BreedResponseDTO();
+
         breedResponseDTO.setId(breed.getId());
         breedResponseDTO.setBreedName(breed.getBreedName());
+        breedResponseDTO.setPetCategoryId(petCategoryId);
 
         return breedResponseDTO;
     }

@@ -9,4 +9,5 @@ public class BreedResponseDTO {
 
     private Long id;
     private String breedName;
+    private Long petCategoryId;
 }
