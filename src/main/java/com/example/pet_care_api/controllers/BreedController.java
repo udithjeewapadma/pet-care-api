@@ -39,4 +39,10 @@ public class BreedController {
     public List<BreedResponseDTO> getAllBreeds() {
         return breedService.getAllBreeds();
     }
+
+    @DeleteMapping("/{breed-id}")
+    private void deleteBreedById(@PathVariable("breed-id") Long breedId) {
+        breedService.deleteBreedById(breedId);
+    }
+
 }

@@ -13,4 +13,6 @@ public interface BreedService {
     BreedResponseDTO getBreedById(Long id);
 
     List<BreedResponseDTO> getAllBreeds();
+
+    void deleteBreedById(Long id);
 }

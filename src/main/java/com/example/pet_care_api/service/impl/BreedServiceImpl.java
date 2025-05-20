@@ -47,5 +47,10 @@ public class BreedServiceImpl implements BreedService {
         }).collect(Collectors.toList());
     }
 
+    @Override
+    public void deleteBreedById(Long id) {
+        breedRepository.deleteById(id);
+    }
+
 
 }
