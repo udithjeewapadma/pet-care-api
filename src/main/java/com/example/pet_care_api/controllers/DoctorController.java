@@ -45,4 +45,18 @@ public class DoctorController {
     private void deleteDoctorById(@PathVariable("doctor-id") Long doctorId) {
         doctorService.deleteDoctorById(doctorId);
     }
+
+    @PutMapping("/{doctor-id}")
+    private DoctorResponseDTO updateDoctor(@PathVariable("doctor-id") Long id,
+                                           @RequestBody CreateDoctorRequestDTO createDoctorRequestDTO) {
+        Doctor doctor = doctorService.updateDoctor(id,createDoctorRequestDTO);
+
+        DoctorResponseDTO doctorResponseDTO = new DoctorResponseDTO();
+        doctorResponseDTO.setId(doctor.getId());
+        doctorResponseDTO.setDoctorName(doctor.getDoctorName());
+        doctorResponseDTO.setPhoneNumber(doctor.getPhoneNumber());
+        doctorResponseDTO.setQualifications(doctor.getQualifications());
+        return doctorResponseDTO;
+
+    }
 }
