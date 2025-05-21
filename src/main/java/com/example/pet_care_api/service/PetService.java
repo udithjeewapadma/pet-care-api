@@ -18,4 +18,6 @@ public interface PetService {
     List<PetResponseDTO> findAllPets();
 
     void deletePetById(Long petId);
+
+    Pet updatePet(Long id,CreatePetRequestDTO createPetRequestDTO) throws IOException;
 }

@@ -136,4 +136,33 @@ public class PetServiceImpl implements PetService {
         petRepository.deleteById(petId);
     }
 
+    @Override
+    @Transactional
+    public Pet updatePet(Long id, CreatePetRequestDTO createPetRequestDTO) throws IOException {
+        Pet pet = petRepository.findById(id)
+                .orElseThrow(() -> new PetNotFoundException("Pet Not Found"));
+
+        pet.setPetName(createPetRequestDTO.getPetName());
+        pet.setGender(createPetRequestDTO.getGender());
+        pet.setBirthDate(createPetRequestDTO.getBirthDate());
+
+        if (createPetRequestDTO.getImageFiles() != null) {
+            List<String> imageUrls = new ArrayList<>();
+            for (MultipartFile file : createPetRequestDTO.getImageFiles()) {
+                try {
+                    String imageUrl = cloudinary.uploader()
+                            .upload(file.getBytes(), Map.of("public_id", UUID.randomUUID().toString()))
+                            .get("url")
+                            .toString();
+                    imageUrls.add(imageUrl);
+                } catch (IOException e) {
+                    throw new RuntimeException("Failed to upload image", e);
+                }
+            }
+            pet.setImageUrl(imageUrls);
+        }
+
+        return petRepository.save(pet);
+    }
+
 }
