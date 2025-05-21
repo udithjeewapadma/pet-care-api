@@ -3,6 +3,8 @@ package com.example.pet_care_api.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "pets")
@@ -16,6 +18,9 @@ public class Pet {
     private String age;
     private String weight;
     private String birthDate;
+
+    @ElementCollection
+    private List<String> imageUrl;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id")

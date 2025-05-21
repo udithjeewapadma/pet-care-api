@@ -3,6 +3,8 @@ package com.example.pet_care_api.controllers.dto.response;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 public class PetResponseDTO {
@@ -12,4 +14,6 @@ public class PetResponseDTO {
     private String age;
     private String weight;
     private String birthDate;
+    private List<String> imageUrls;
+
 }
