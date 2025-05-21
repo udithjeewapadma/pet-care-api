@@ -138,31 +138,37 @@ public class PetServiceImpl implements PetService {
 
     @Override
     @Transactional
-    public Pet updatePet(Long id, CreatePetRequestDTO createPetRequestDTO) throws IOException {
-        Pet pet = petRepository.findById(id)
-                .orElseThrow(() -> new PetNotFoundException("Pet Not Found"));
+    public PetResponseDTO updatePet(Long id, CreatePetRequestDTO request) throws IOException {
+        Pet pet = petRepository.findById(id).orElseThrow(() -> new PetNotFoundException("Pet not found"));
 
-        pet.setPetName(createPetRequestDTO.getPetName());
-        pet.setGender(createPetRequestDTO.getGender());
-        pet.setBirthDate(createPetRequestDTO.getBirthDate());
+        pet.setPetName(request.getPetName());
+        pet.setGender(request.getGender());
+        pet.setBirthDate(request.getBirthDate());
 
-        if (createPetRequestDTO.getImageFiles() != null) {
-            List<String> imageUrls = new ArrayList<>();
-            for (MultipartFile file : createPetRequestDTO.getImageFiles()) {
-                try {
-                    String imageUrl = cloudinary.uploader()
-                            .upload(file.getBytes(), Map.of("public_id", UUID.randomUUID().toString()))
-                            .get("url")
-                            .toString();
-                    imageUrls.add(imageUrl);
-                } catch (IOException e) {
-                    throw new RuntimeException("Failed to upload image", e);
-                }
+        List<String> imageUrls = new ArrayList<>();
+        if (request.getImageFiles() != null) {
+            for (MultipartFile file : request.getImageFiles()) {
+                String imageUrl = cloudinary.uploader()
+                        .upload(file.getBytes(), Map.of("public_id", UUID.randomUUID().toString()))
+                        .get("url").toString();
+                imageUrls.add(imageUrl);
             }
             pet.setImageUrl(imageUrls);
         }
 
-        return petRepository.save(pet);
+        Pet updatedPet = petRepository.save(pet);
+
+        return new PetResponseDTO(
+                updatedPet.getId(),
+                updatedPet.getPetName(),
+                updatedPet.getGender(),
+                updatedPet.getBirthDate(),
+                updatedPet.getImageUrl(),
+                updatedPet.getPetOwner().getId(),
+                updatedPet.getDoctor().getId(),
+                updatedPet.getPetCategory().getId()
+        );
     }
+
 
 }

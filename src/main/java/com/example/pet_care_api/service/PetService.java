@@ -19,5 +19,5 @@ public interface PetService {
 
     void deletePetById(Long petId);
 
-    Pet updatePet(Long id,CreatePetRequestDTO createPetRequestDTO) throws IOException;
+    PetResponseDTO updatePet(Long id,CreatePetRequestDTO createPetRequestDTO) throws IOException;
 }

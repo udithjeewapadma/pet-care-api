@@ -1,5 +1,6 @@
 package com.example.pet_care_api.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,6 +22,6 @@ public class Doctor {
     @JoinColumn(name = "petClinic_id")
     private PetClinic petClinic;
 
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Pet> pets;
 }

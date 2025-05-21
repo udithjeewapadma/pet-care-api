@@ -17,6 +17,6 @@ public class PetOwner {
     private String address;
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "petOwner",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "petOwner",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Pet> pets;
 }

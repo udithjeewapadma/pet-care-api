@@ -2,6 +2,7 @@ package com.example.pet_care_api.controllers;
 
 import com.example.pet_care_api.controllers.dto.request.CreatePetRequestDTO;
 import com.example.pet_care_api.controllers.dto.response.PetResponseDTO;
+import com.example.pet_care_api.models.Pet;
 import com.example.pet_care_api.service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,5 +43,12 @@ public class PetController {
     private void deletePetById(@PathVariable("pet-id") Long petId) {
         petService.deletePetById(petId);
     }
+
+    @PutMapping("/{pet-id}")
+    public PetResponseDTO updatePet(@PathVariable("pet-id") Long id,
+                         @ModelAttribute CreatePetRequestDTO createPetRequestDTO) throws IOException {
+        return petService.updatePet(id, createPetRequestDTO);
+    }
+
 
 }
