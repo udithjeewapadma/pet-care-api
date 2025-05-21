@@ -20,7 +20,7 @@ public class Pet {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private String birthDate;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> imageUrl;
 
     @ManyToOne

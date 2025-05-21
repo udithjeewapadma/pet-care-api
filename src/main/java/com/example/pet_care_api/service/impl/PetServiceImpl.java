@@ -16,6 +16,7 @@ import com.example.pet_care_api.repositories.PetCategoryRepository;
 import com.example.pet_care_api.repositories.PetOwnerRepository;
 import com.example.pet_care_api.repositories.PetRepository;
 import com.example.pet_care_api.service.PetService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -93,18 +94,25 @@ public class PetServiceImpl implements PetService {
         return responseDTO;
     }
 
+
     @Override
+    @Transactional
     public PetResponseDTO getPetById(Long petId) {
 
         Pet pet = petRepository.findById(petId)
                 .orElseThrow(() -> new PetNotFoundException("Pet Not Found"));
 
-        PetResponseDTO responseDTO = new PetResponseDTO();
-        responseDTO.setId(pet.getId());
-        responseDTO.setPetName(pet.getPetName());
-        responseDTO.setGender(pet.getGender());
-        responseDTO.setBirthDate(pet.getBirthDate());
-        responseDTO.setImageUrls(pet.getImageUrl());
-        return responseDTO;
+        return new PetResponseDTO(
+                pet.getId(),
+                pet.getPetName(),
+                pet.getGender(),                    // moved gender up
+                pet.getBirthDate(),
+                pet.getImageUrl(),
+                pet.getPetOwner().getId(),
+                pet.getDoctor().getId(),
+                pet.getPetCategory().getId()
+        );
+
     }
+
 }

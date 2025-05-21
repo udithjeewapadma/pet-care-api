@@ -27,5 +27,10 @@ public class PetController {
 
     }
 
+    @GetMapping("/{pet-id}")
+    public PetResponseDTO getPetById(@PathVariable("pet-id") Long petId) {
+        return petService.getPetById(petId);
+    }
+
 
 }
