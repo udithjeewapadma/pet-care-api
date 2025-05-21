@@ -15,8 +15,6 @@ public class Pet {
     private Long id;
     private String petName;
     private String gender;
-    private String age;
-    private String weight;
     private String birthDate;
 
     @ElementCollection

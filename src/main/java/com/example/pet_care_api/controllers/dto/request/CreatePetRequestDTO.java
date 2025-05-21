@@ -9,8 +9,6 @@ import java.util.List;
 public class CreatePetRequestDTO {
     private String petName;
     private String gender;
-    private String age;
-    private String weight;
     private String birthDate;
 
     private List<MultipartFile> imageFiles;
