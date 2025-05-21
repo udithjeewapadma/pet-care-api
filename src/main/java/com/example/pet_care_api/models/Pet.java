@@ -2,6 +2,7 @@ package com.example.pet_care_api.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ public class Pet {
     private Long id;
     private String petName;
     private String gender;
+
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private String birthDate;
 
     @ElementCollection

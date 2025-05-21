@@ -65,18 +65,20 @@ public class PetServiceImpl implements PetService {
         pet.setPetCategory(petCategory);
         pet.setDoctor(doctor);
         pet.setPetOwner(petOwner);
-        List<String> imageUrls = new ArrayList<>();
 
-        // Upload images to Cloudinary
-        for (MultipartFile file : createPetRequestDTO.getImageFiles()) {
-            String imageUrl = cloudinary.uploader()
-                    .upload(file.getBytes(),
-                            Map.of("public_id", UUID.randomUUID().toString()))
-                    .get("url")
-                    .toString();
-            imageUrls.add(imageUrl);
+        List<String> imageUrls = new ArrayList<>();
+        if (createPetRequestDTO.getImageFiles() != null) {
+            for (MultipartFile file : createPetRequestDTO.getImageFiles()) {
+                String imageUrl = cloudinary.uploader()
+                        .upload(file.getBytes(),
+                                Map.of("public_id", UUID.randomUUID().toString()))
+                        .get("url")
+                        .toString();
+                imageUrls.add(imageUrl);
+            }
         }
         pet.setImageUrl(imageUrls);
+
 
         Pet savedPet = petRepository.save(pet);
 
