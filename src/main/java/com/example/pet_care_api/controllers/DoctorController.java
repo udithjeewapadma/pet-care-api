@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/doctors")
 public class DoctorController {
@@ -32,5 +34,10 @@ public class DoctorController {
     @GetMapping("/{doctor-id}")
     private DoctorResponseDTO getDoctorById(@PathVariable("doctor-id") Long doctorId) {
         return doctorService.findDoctorById(doctorId);
+    }
+
+    @GetMapping
+    private List<DoctorResponseDTO> findAllDoctors() {
+        return doctorService.findAllDoctors();
     }
 }
