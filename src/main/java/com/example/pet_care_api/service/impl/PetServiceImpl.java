@@ -5,6 +5,7 @@ import com.example.pet_care_api.controllers.dto.request.CreatePetRequestDTO;
 import com.example.pet_care_api.controllers.dto.response.PetResponseDTO;
 import com.example.pet_care_api.exceptions.DoctorNotFoundException;
 import com.example.pet_care_api.exceptions.PetCategoryNotFoundException;
+import com.example.pet_care_api.exceptions.PetNotFoundException;
 import com.example.pet_care_api.exceptions.PetOwnerNotFoundException;
 import com.example.pet_care_api.models.Doctor;
 import com.example.pet_care_api.models.Pet;
@@ -89,6 +90,21 @@ public class PetServiceImpl implements PetService {
         responseDTO.setBirthDate(savedPet.getBirthDate());
         responseDTO.setImageUrls(savedPet.getImageUrl());
 
+        return responseDTO;
+    }
+
+    @Override
+    public PetResponseDTO getPetById(Long petId) {
+
+        Pet pet = petRepository.findById(petId)
+                .orElseThrow(() -> new PetNotFoundException("Pet Not Found"));
+
+        PetResponseDTO responseDTO = new PetResponseDTO();
+        responseDTO.setId(pet.getId());
+        responseDTO.setPetName(pet.getPetName());
+        responseDTO.setGender(pet.getGender());
+        responseDTO.setBirthDate(pet.getBirthDate());
+        responseDTO.setImageUrls(pet.getImageUrl());
         return responseDTO;
     }
 }

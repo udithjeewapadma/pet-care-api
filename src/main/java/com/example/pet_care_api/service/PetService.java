@@ -11,4 +11,6 @@ public interface PetService {
     PetResponseDTO createPet(Long doctorId,
                              Long petCategoryId,
                              Long petOwnerId, CreatePetRequestDTO createPetRequestDTO) throws IOException;
+
+    PetResponseDTO getPetById(Long petId);
 }
