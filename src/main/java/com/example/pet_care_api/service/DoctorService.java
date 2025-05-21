@@ -13,4 +13,6 @@ public interface DoctorService {
     DoctorResponseDTO findDoctorById(Long id);
 
     List<DoctorResponseDTO> findAllDoctors();
+
+    void deleteDoctorById(Long id);
 }

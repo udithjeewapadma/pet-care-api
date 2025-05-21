@@ -53,4 +53,9 @@ public class DoctorServiceImpl implements DoctorService {
             return doctorResponseDTO;
         }).collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteDoctorById(Long id) {
+         doctorRepository.deleteById(id);
+    }
 }
