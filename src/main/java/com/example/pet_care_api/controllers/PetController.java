@@ -38,4 +38,9 @@ public class PetController {
         return petService.findAllPets();
     }
 
+    @DeleteMapping("/{pet-id}")
+    private void deletePetById(@PathVariable("pet-id") Long petId) {
+        petService.deletePetById(petId);
+    }
+
 }
