@@ -16,4 +16,6 @@ public interface PetService {
     PetResponseDTO getPetById(Long petId);
 
     List<PetResponseDTO> findAllPets();
+
+    void deletePetById(Long petId);
 }
