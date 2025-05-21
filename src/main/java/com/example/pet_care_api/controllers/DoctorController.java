@@ -28,4 +28,9 @@ public class DoctorController {
 
         return doctorResponseDTO;
     }
+
+    @GetMapping("/{doctor-id}")
+    private DoctorResponseDTO getDoctorById(@PathVariable("doctor-id") Long doctorId) {
+        return doctorService.findDoctorById(doctorId);
+    }
 }
