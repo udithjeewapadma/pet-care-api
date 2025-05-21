@@ -58,4 +58,15 @@ public class DoctorServiceImpl implements DoctorService {
     public void deleteDoctorById(Long id) {
          doctorRepository.deleteById(id);
     }
+
+    @Override
+    public Doctor updateDoctor(Long id, CreateDoctorRequestDTO createDoctorRequestDTO) {
+
+        Doctor existingDoctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new DoctorNotFoundException("Doctor not found"));
+        existingDoctor.setDoctorName(createDoctorRequestDTO.getDoctorName());
+        existingDoctor.setPhoneNumber(createDoctorRequestDTO.getPhoneNumber());
+        existingDoctor.setQualifications(createDoctorRequestDTO.getQualifications());
+        return doctorRepository.save(existingDoctor);
+    }
 }
