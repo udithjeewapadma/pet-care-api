@@ -1,6 +1,8 @@
 package com.example.pet_care_api.service.impl;
 
 import com.example.pet_care_api.controllers.dto.request.CreateDoctorRequestDTO;
+import com.example.pet_care_api.controllers.dto.response.DoctorResponseDTO;
+import com.example.pet_care_api.exceptions.DoctorNotFoundException;
 import com.example.pet_care_api.models.Doctor;
 import com.example.pet_care_api.repositories.DoctorRepository;
 import com.example.pet_care_api.service.DoctorService;
@@ -21,5 +23,18 @@ public class DoctorServiceImpl implements DoctorService {
         doctor.setPhoneNumber(createDoctorRequestDTO.getPhoneNumber());
         doctor.setQualifications(createDoctorRequestDTO.getQualifications());
         return doctorRepository.save(doctor);
+    }
+
+    @Override
+    public DoctorResponseDTO findDoctorById(Long id) {
+
+        Doctor doctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new DoctorNotFoundException("Doctor not found"));
+        DoctorResponseDTO doctorResponseDTO = new DoctorResponseDTO();
+        doctorResponseDTO.setId(doctor.getId());
+        doctorResponseDTO.setDoctorName(doctor.getDoctorName());
+        doctorResponseDTO.setPhoneNumber(doctor.getPhoneNumber());
+        doctorResponseDTO.setQualifications(doctor.getQualifications());
+        return doctorResponseDTO;
     }
 }
