@@ -40,4 +40,9 @@ public class DoctorController {
     private List<DoctorResponseDTO> findAllDoctors() {
         return doctorService.findAllDoctors();
     }
+
+    @DeleteMapping("/{doctor-id}")
+    private void deleteDoctorById(@PathVariable("doctor-id") Long doctorId) {
+        doctorService.deleteDoctorById(doctorId);
+    }
 }
