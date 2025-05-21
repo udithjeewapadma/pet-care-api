@@ -5,6 +5,7 @@ import com.example.pet_care_api.controllers.dto.response.PetResponseDTO;
 import com.example.pet_care_api.models.Pet;
 
 import java.io.IOException;
+import java.util.List;
 
 public interface PetService {
 
@@ -13,4 +14,6 @@ public interface PetService {
                              Long petOwnerId, CreatePetRequestDTO createPetRequestDTO) throws IOException;
 
     PetResponseDTO getPetById(Long petId);
+
+    List<PetResponseDTO> findAllPets();
 }

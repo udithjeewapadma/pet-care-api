@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class PetServiceImpl implements PetService {
@@ -105,7 +106,7 @@ public class PetServiceImpl implements PetService {
         return new PetResponseDTO(
                 pet.getId(),
                 pet.getPetName(),
-                pet.getGender(),                    // moved gender up
+                pet.getGender(),
                 pet.getBirthDate(),
                 pet.getImageUrl(),
                 pet.getPetOwner().getId(),
@@ -113,6 +114,21 @@ public class PetServiceImpl implements PetService {
                 pet.getPetCategory().getId()
         );
 
+    }
+
+    @Override
+    public List<PetResponseDTO> findAllPets() {
+        List<Pet> pets = petRepository.findAll();
+        return pets.stream().map(pet -> new PetResponseDTO(
+                pet.getId(),
+                pet.getPetName(),
+                pet.getGender(),
+                pet.getBirthDate(),
+                pet.getImageUrl(),
+                pet.getPetOwner().getId(),
+                pet.getDoctor().getId(),
+                pet.getPetCategory().getId()
+        )).collect(Collectors.toList());
     }
 
 }
