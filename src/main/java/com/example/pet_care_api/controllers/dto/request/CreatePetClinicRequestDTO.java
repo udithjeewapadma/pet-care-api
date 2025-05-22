@@ -10,5 +10,5 @@ public class CreatePetClinicRequestDTO {
 
     private String clinicName;
     private String address;
-    private int phoneNumber;
+    private String phoneNumber;
 }

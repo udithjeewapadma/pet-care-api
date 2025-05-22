@@ -13,7 +13,7 @@ public class PetClinic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String shopName;
+    private String clinicName;
     private String address;
     private String phoneNumber;
 
