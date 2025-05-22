@@ -44,4 +44,16 @@ public class PetClinicController {
     private void deletePetClinicById(@PathVariable("pet-clinic-id") Long id) {
         petClinicService.deletePetClinicById(id);
     }
+
+    @PutMapping("/{pet-clinic-id}")
+    private PetClinicResponseDTO updatePetClinic(@PathVariable("pet-clinic-id") Long id, @RequestBody CreatePetClinicRequestDTO createPetClinicRequestDTO) {
+
+        PetClinic petClinic = petClinicService.updatePetClinic(id, createPetClinicRequestDTO);
+        PetClinicResponseDTO petClinicResponseDTO = new PetClinicResponseDTO();
+        petClinicResponseDTO.setId(petClinic.getId());
+        petClinicResponseDTO.setClinicName(petClinic.getClinicName());
+        petClinicResponseDTO.setAddress(petClinic.getAddress());
+        petClinicResponseDTO.setPhoneNumber(petClinic.getPhoneNumber());
+        return petClinicResponseDTO;
+    }
 }
