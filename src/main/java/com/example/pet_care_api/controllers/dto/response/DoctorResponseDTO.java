@@ -11,4 +11,6 @@ public class DoctorResponseDTO {
     private String doctorName;
     private String qualifications;
     private int phoneNumber;
+
+    private Long petClinicId;
 }

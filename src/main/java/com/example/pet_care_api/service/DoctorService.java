@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface DoctorService {
 
-    Doctor createDoctor(CreateDoctorRequestDTO createDoctorRequestDTO);
+    Doctor createDoctor(Long petClinicId, CreateDoctorRequestDTO createDoctorRequestDTO);
 
     DoctorResponseDTO findDoctorById(Long id);
 

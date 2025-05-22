@@ -3,8 +3,12 @@ package com.example.pet_care_api.service.impl;
 import com.example.pet_care_api.controllers.dto.request.CreateDoctorRequestDTO;
 import com.example.pet_care_api.controllers.dto.response.DoctorResponseDTO;
 import com.example.pet_care_api.exceptions.DoctorNotFoundException;
+import com.example.pet_care_api.exceptions.PetClinicNotFoundException;
 import com.example.pet_care_api.models.Doctor;
+import com.example.pet_care_api.models.PetClinic;
 import com.example.pet_care_api.repositories.DoctorRepository;
+import com.example.pet_care_api.repositories.PetClinicRepository;
+import com.example.pet_care_api.repositories.PetRepository;
 import com.example.pet_care_api.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,13 +22,21 @@ public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
 
+    @Autowired
+    private PetClinicRepository petClinicRepository;
+
 
     @Override
-    public Doctor createDoctor(CreateDoctorRequestDTO createDoctorRequestDTO) {
+    public Doctor createDoctor(Long petClinicId,CreateDoctorRequestDTO createDoctorRequestDTO) {
+
+        PetClinic petClinic = petClinicRepository.findById(petClinicId)
+                .orElseThrow(() -> new PetClinicNotFoundException("pet clinic not found"));
+
         Doctor doctor = new Doctor();
         doctor.setDoctorName(createDoctorRequestDTO.getDoctorName());
         doctor.setPhoneNumber(createDoctorRequestDTO.getPhoneNumber());
         doctor.setQualifications(createDoctorRequestDTO.getQualifications());
+        doctor.setPetClinic(petClinic);
         return doctorRepository.save(doctor);
     }
 
@@ -38,6 +50,7 @@ public class DoctorServiceImpl implements DoctorService {
         doctorResponseDTO.setDoctorName(doctor.getDoctorName());
         doctorResponseDTO.setPhoneNumber(doctor.getPhoneNumber());
         doctorResponseDTO.setQualifications(doctor.getQualifications());
+        doctorResponseDTO.setPetClinicId(doctor.getPetClinic().getId());
         return doctorResponseDTO;
     }
 
@@ -50,6 +63,7 @@ public class DoctorServiceImpl implements DoctorService {
             doctorResponseDTO.setDoctorName(doctor.getDoctorName());
             doctorResponseDTO.setPhoneNumber(doctor.getPhoneNumber());
             doctorResponseDTO.setQualifications(doctor.getQualifications());
+            doctorResponseDTO.setPetClinicId(doctor.getPetClinic().getId());
             return doctorResponseDTO;
         }).collect(Collectors.toList());
     }
@@ -67,6 +81,7 @@ public class DoctorServiceImpl implements DoctorService {
         existingDoctor.setDoctorName(createDoctorRequestDTO.getDoctorName());
         existingDoctor.setPhoneNumber(createDoctorRequestDTO.getPhoneNumber());
         existingDoctor.setQualifications(createDoctorRequestDTO.getQualifications());
+
         return doctorRepository.save(existingDoctor);
     }
 }

@@ -19,14 +19,16 @@ public class DoctorController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private DoctorResponseDTO createDoctor(@RequestBody CreateDoctorRequestDTO createDoctorRequestDTO) {
-        Doctor doctor = doctorService.createDoctor(createDoctorRequestDTO);
+    private DoctorResponseDTO createDoctor(@RequestParam Long petClinicId,
+                                           @RequestBody CreateDoctorRequestDTO createDoctorRequestDTO) {
+        Doctor doctor = doctorService.createDoctor(petClinicId,createDoctorRequestDTO);
 
         DoctorResponseDTO doctorResponseDTO = new DoctorResponseDTO();
         doctorResponseDTO.setId(doctor.getId());
         doctorResponseDTO.setDoctorName(doctor.getDoctorName());
         doctorResponseDTO.setPhoneNumber(doctor.getPhoneNumber());
         doctorResponseDTO.setQualifications(doctor.getQualifications());
+        doctorResponseDTO.setPetClinicId(doctor.getPetClinic().getId());
 
         return doctorResponseDTO;
     }
