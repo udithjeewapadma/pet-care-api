@@ -13,4 +13,6 @@ public interface PetClinicService {
     PetClinicResponseDTO findPetClinicById(Long id);
 
     List<PetClinicResponseDTO> findAllPetClinics();
+
+    void deletePetClinicById(Long id);
 }

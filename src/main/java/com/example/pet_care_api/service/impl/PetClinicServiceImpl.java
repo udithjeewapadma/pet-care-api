@@ -54,4 +54,9 @@ public class PetClinicServiceImpl implements PetClinicService {
             return petClinicResponseDTO;
         }).collect(Collectors.toList());
     }
+
+    @Override
+    public void deletePetClinicById(Long id) {
+        petClinicRepository.deleteById(id);
+    }
 }
