@@ -1,6 +1,8 @@
 package com.example.pet_care_api.service.impl;
 
 import com.example.pet_care_api.controllers.dto.request.CreatePetClinicRequestDTO;
+import com.example.pet_care_api.controllers.dto.response.PetClinicResponseDTO;
+import com.example.pet_care_api.exceptions.PetClinicNotFoundException;
 import com.example.pet_care_api.models.PetClinic;
 import com.example.pet_care_api.repositories.PetClinicRepository;
 import com.example.pet_care_api.service.PetClinicService;
@@ -22,5 +24,18 @@ public class PetClinicServiceImpl implements PetClinicService {
 
         return petClinicRepository.save(petClinic);
 
+    }
+
+    @Override
+    public PetClinicResponseDTO findPetClinicById(Long id) {
+
+        PetClinic petClinic = petClinicRepository.findById(id)
+                .orElseThrow(() -> new PetClinicNotFoundException("pet clinic not found"));
+        PetClinicResponseDTO petClinicResponseDTO = new PetClinicResponseDTO();
+        petClinicResponseDTO.setId(petClinic.getId());
+        petClinicResponseDTO.setClinicName(petClinic.getClinicName());
+        petClinicResponseDTO.setAddress(petClinic.getAddress());
+        petClinicResponseDTO.setPhoneNumber(petClinic.getPhoneNumber());
+        return petClinicResponseDTO;
     }
 }
