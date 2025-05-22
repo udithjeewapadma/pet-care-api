@@ -12,5 +12,5 @@ public interface PetClinicService {
 
     PetClinicResponseDTO findPetClinicById(Long id);
 
-    List<PetClinicResponseDTO> findAllPetClinics(Long id);
+    List<PetClinicResponseDTO> findAllPetClinics();
 }

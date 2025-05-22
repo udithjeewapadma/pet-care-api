@@ -43,7 +43,7 @@ public class PetClinicServiceImpl implements PetClinicService {
     }
 
     @Override
-    public List<PetClinicResponseDTO> findAllPetClinics(Long id) {
+    public List<PetClinicResponseDTO> findAllPetClinics() {
         List<PetClinic> petClinics = petClinicRepository.findAll();
         return petClinics.stream().map(petClinic -> {
             PetClinicResponseDTO petClinicResponseDTO = new PetClinicResponseDTO();

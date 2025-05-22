@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/clinics")
 public class PetClinicController {
@@ -31,5 +33,10 @@ public class PetClinicController {
     @GetMapping("/{pet-clinic-id}")
     private PetClinicResponseDTO findPetClinicById(@PathVariable("pet-clinic-id") Long id) {
         return petClinicService.findPetClinicById(id);
+    }
+
+    @GetMapping
+    private List<PetClinicResponseDTO> findAllPetClinics() {
+        return petClinicService.findAllPetClinics();
     }
 }
