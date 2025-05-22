@@ -59,4 +59,17 @@ public class PetClinicServiceImpl implements PetClinicService {
     public void deletePetClinicById(Long id) {
         petClinicRepository.deleteById(id);
     }
+
+    @Override
+    public PetClinic updatePetClinic(Long id, CreatePetClinicRequestDTO createPetClinicRequestDTO) {
+
+        PetClinic existingPetClinic = petClinicRepository.findById(id)
+                .orElseThrow(() -> new PetClinicNotFoundException("pet clinic not found"));
+
+        existingPetClinic.setClinicName(createPetClinicRequestDTO.getClinicName());
+        existingPetClinic.setAddress(createPetClinicRequestDTO.getAddress());
+        existingPetClinic.setPhoneNumber(createPetClinicRequestDTO.getPhoneNumber());
+
+        return petClinicRepository.save(existingPetClinic);
+    }
 }

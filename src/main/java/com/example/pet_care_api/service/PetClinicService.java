@@ -15,4 +15,6 @@ public interface PetClinicService {
     List<PetClinicResponseDTO> findAllPetClinics();
 
     void deletePetClinicById(Long id);
+
+    PetClinic updatePetClinic(Long id, CreatePetClinicRequestDTO createPetClinicRequestDTO);
 }
