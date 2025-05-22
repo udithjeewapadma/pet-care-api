@@ -39,4 +39,9 @@ public class PetClinicController {
     private List<PetClinicResponseDTO> findAllPetClinics() {
         return petClinicService.findAllPetClinics();
     }
+
+    @DeleteMapping("/{pet-clinic-id}")
+    private void deletePetClinicById(@PathVariable("pet-clinic-id") Long id) {
+        petClinicService.deletePetClinicById(id);
+    }
 }
