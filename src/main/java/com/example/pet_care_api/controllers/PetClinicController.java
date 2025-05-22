@@ -27,4 +27,9 @@ public class PetClinicController {
         petClinicResponseDTO.setPhoneNumber(petClinic.getPhoneNumber());
         return petClinicResponseDTO;
     }
+
+    @GetMapping("/{pet-clinic-id}")
+    private PetClinicResponseDTO findPetClinicById(@PathVariable("pet-clinic-id") Long id) {
+        return petClinicService.findPetClinicById(id);
+    }
 }
