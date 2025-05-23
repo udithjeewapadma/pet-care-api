@@ -17,9 +17,9 @@ public class Stock {
     @Enumerated(EnumType.STRING)
     private VisibilityStatus visibilityStatus;
 
-    @OneToOne
-    @JoinColumn(name = "pet_clinic_id")
-    private PetClinic petClinic;
+    @ManyToOne
+    @JoinColumn(name = "stock_id")
+    private Stock stock;
 
     @OneToMany(mappedBy = "stock",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<FoodStock> foodStocks;

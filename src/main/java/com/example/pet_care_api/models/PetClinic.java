@@ -27,4 +27,7 @@ public class PetClinic {
             inverseJoinColumns = @JoinColumn(name = "dealerId")
     )
     private List<Dealer> dealers;
+
+    @OneToMany(mappedBy = "stock",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Stock> stocks;
 }
