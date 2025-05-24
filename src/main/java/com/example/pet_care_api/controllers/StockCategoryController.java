@@ -28,4 +28,9 @@ public class StockCategoryController {
         return stockCategoryResponseDTO;
 
     }
+
+    @GetMapping("/{stock-category-id}")
+    public StockCategoryResponseDTO getStockCategoryById(@PathVariable("stock-category-id") Long stockCategoryId) {
+        return stockCategoryService.findStockCategoryById(stockCategoryId);
+    }
 }
