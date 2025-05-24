@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/stockCategories")
 public class StockCategoryController {
@@ -32,5 +34,10 @@ public class StockCategoryController {
     @GetMapping("/{stock-category-id}")
     public StockCategoryResponseDTO getStockCategoryById(@PathVariable("stock-category-id") Long stockCategoryId) {
         return stockCategoryService.findStockCategoryById(stockCategoryId);
+    }
+
+    @GetMapping
+    public List<StockCategoryResponseDTO> getAllStockCategories() {
+        return stockCategoryService.findAllStockCategories();
     }
 }
