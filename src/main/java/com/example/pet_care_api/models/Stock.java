@@ -18,4 +18,7 @@ public class Stock {
     @Enumerated(EnumType.STRING)
     private VisibilityStatus visibilityStatus;
 
+    @ManyToOne
+    @JoinColumn(name = "stockCategory_id")
+    private StockCategory stockCategory;
 }
