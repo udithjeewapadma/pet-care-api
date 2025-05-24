@@ -40,4 +40,9 @@ public class StockCategoryController {
     public List<StockCategoryResponseDTO> getAllStockCategories() {
         return stockCategoryService.findAllStockCategories();
     }
+
+    @DeleteMapping("/{stock-category-id}")
+    private void deleteStockCategoryById(@PathVariable("stock-category-id") Long stockCategoryId) {
+        stockCategoryService.deleteStockCategoryById(stockCategoryId);
+    }
 }
