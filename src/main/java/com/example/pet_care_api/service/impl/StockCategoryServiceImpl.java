@@ -47,4 +47,9 @@ public class StockCategoryServiceImpl implements StockCategoryService {
             return stockCategoryResponseDTO;
         }).collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteStockCategoryById(Long id) {
+        stockCategoryRepository.deleteById(id);
+    }
 }

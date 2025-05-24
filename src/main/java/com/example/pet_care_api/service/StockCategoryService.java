@@ -13,4 +13,6 @@ public interface StockCategoryService {
     StockCategoryResponseDTO findStockCategoryById(Long id);
 
     List<StockCategoryResponseDTO> findAllStockCategories();
+
+    void deleteStockCategoryById(Long id);
 }
