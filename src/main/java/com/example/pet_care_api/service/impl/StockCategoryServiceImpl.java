@@ -1,6 +1,8 @@
 package com.example.pet_care_api.service.impl;
 
 import com.example.pet_care_api.controllers.dto.request.CreateStockCategoryRequestDTO;
+import com.example.pet_care_api.controllers.dto.response.StockCategoryResponseDTO;
+import com.example.pet_care_api.exceptions.StockCategoryNotFoundException;
 import com.example.pet_care_api.models.StockCategory;
 import com.example.pet_care_api.repositories.StockCategoryRepository;
 import com.example.pet_care_api.service.StockCategoryService;
@@ -19,5 +21,16 @@ public class StockCategoryServiceImpl implements StockCategoryService {
         StockCategory stockCategory = new StockCategory();
         stockCategory.setCategoryName(createStockCategoryRequestDTO.getCategoryName());
         return stockCategoryRepository.save(stockCategory);
+    }
+
+    @Override
+    public StockCategoryResponseDTO findStockCategoryById(Long id) {
+
+        StockCategory stockCategory = stockCategoryRepository.findById(id)
+                .orElseThrow(() -> new StockCategoryNotFoundException("Stock Category Not Found"));
+        StockCategoryResponseDTO stockCategoryResponseDTO = new StockCategoryResponseDTO();
+        stockCategoryResponseDTO.setId(stockCategory.getId());
+        stockCategoryResponseDTO.setCategoryName(stockCategory.getCategoryName());
+        return stockCategoryResponseDTO;
     }
 }
