@@ -9,6 +9,9 @@ import com.example.pet_care_api.service.StockCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class StockCategoryServiceImpl implements StockCategoryService {
 
@@ -32,5 +35,16 @@ public class StockCategoryServiceImpl implements StockCategoryService {
         stockCategoryResponseDTO.setId(stockCategory.getId());
         stockCategoryResponseDTO.setCategoryName(stockCategory.getCategoryName());
         return stockCategoryResponseDTO;
+    }
+
+    @Override
+    public List<StockCategoryResponseDTO> findAllStockCategories() {
+        List<StockCategory> stockCategories = stockCategoryRepository.findAll();
+        return stockCategories.stream().map(stockCategory -> {
+            StockCategoryResponseDTO stockCategoryResponseDTO = new StockCategoryResponseDTO();
+            stockCategoryResponseDTO.setId(stockCategory.getId());
+            stockCategoryResponseDTO.setCategoryName(stockCategory.getCategoryName());
+            return stockCategoryResponseDTO;
+        }).collect(Collectors.toList());
     }
 }
