@@ -16,7 +16,7 @@ public class Stock {
     private String itemCode;
 
     @Enumerated(EnumType.STRING)
-    private VisibilityStatus visibilityStatus;
+    private AvailabilityStatus availabilityStatus;
 
     @ManyToOne
     @JoinColumn(name = "stockCategory_id")
