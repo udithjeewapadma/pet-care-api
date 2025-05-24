@@ -45,4 +45,16 @@ public class StockCategoryController {
     private void deleteStockCategoryById(@PathVariable("stock-category-id") Long stockCategoryId) {
         stockCategoryService.deleteStockCategoryById(stockCategoryId);
     }
+
+    @PutMapping("/{stock-category-id}")
+    private StockCategoryResponseDTO updateStockCategory(
+            @PathVariable("stock-category-id") Long id,
+            @RequestBody CreateStockCategoryRequestDTO createStockCategoryRequestDTO) {
+
+        StockCategory stockCategory = stockCategoryService.updateStockCategory(id, createStockCategoryRequestDTO);
+        StockCategoryResponseDTO stockCategoryResponseDTO = new StockCategoryResponseDTO();
+        stockCategoryResponseDTO.setId(stockCategory.getId());
+        stockCategoryResponseDTO.setCategoryName(stockCategory.getCategoryName());
+        return stockCategoryResponseDTO;
+    }
 }
