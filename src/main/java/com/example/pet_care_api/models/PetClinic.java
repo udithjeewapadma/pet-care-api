@@ -28,6 +28,6 @@ public class PetClinic {
     )
     private List<Dealer> dealers;
 
-    @OneToMany(mappedBy = "stock",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "petClinic",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Stock> stocks;
 }

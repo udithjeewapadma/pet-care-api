@@ -21,4 +21,8 @@ public class Stock {
     @ManyToOne
     @JoinColumn(name = "stockCategory_id")
     private StockCategory stockCategory;
+
+    @ManyToOne
+    @JoinColumn(name = "petClinic_id")
+    private PetClinic petClinic;
 }
