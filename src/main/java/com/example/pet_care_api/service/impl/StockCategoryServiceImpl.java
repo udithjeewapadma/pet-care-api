@@ -52,4 +52,13 @@ public class StockCategoryServiceImpl implements StockCategoryService {
     public void deleteStockCategoryById(Long id) {
         stockCategoryRepository.deleteById(id);
     }
+
+    @Override
+    public StockCategory updateStockCategory(Long id, CreateStockCategoryRequestDTO createStockCategoryRequestDTO) {
+
+        StockCategory existingStockCategory = stockCategoryRepository.findById(id)
+                .orElseThrow(() -> new StockCategoryNotFoundException("Stock Category Not Found"));
+        existingStockCategory.setCategoryName(createStockCategoryRequestDTO.getCategoryName());
+        return stockCategoryRepository.save(existingStockCategory);
+    }
 }
