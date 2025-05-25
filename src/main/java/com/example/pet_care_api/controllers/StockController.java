@@ -50,4 +50,18 @@ public class StockController {
         stockService.deleteStockById(stockId);
     }
 
+    @PutMapping("/{stock-id}")
+    private StockResponseDTO updateStock(@PathVariable("stock-id") Long id,
+                                         @RequestBody CreateStockRequestDTO createStockRequestDTO) {
+
+        Stock stock = stockService.updateStock(id, createStockRequestDTO);
+        StockResponseDTO stockResponseDTO = new StockResponseDTO();
+        stockResponseDTO.setId(stock.getId());
+        stockResponseDTO.setName(stock.getName());
+        stockResponseDTO.setDescription(stock.getDescription());
+        stockResponseDTO.setItemCode(stock.getItemCode());
+        stockResponseDTO.setAvailabilityStatus(stock.getAvailabilityStatus());
+
+        return stockResponseDTO;
+    }
 }
