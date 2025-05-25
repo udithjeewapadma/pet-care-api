@@ -33,4 +33,9 @@ public class StockController {
         return stockResponseDTO;
     }
 
+    @GetMapping("/{stock-id}")
+    public StockResponseDTO findStockById(@PathVariable("stock-id") Long stockId) {
+        return stockService.findStockById(stockId);
+    }
+
 }

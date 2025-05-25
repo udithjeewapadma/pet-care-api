@@ -60,6 +60,8 @@ public class StockServiceImpl implements StockService {
         stockResponseDTO.setDescription(stock.getDescription());
         stockResponseDTO.setItemCode(stock.getItemCode());
         stockResponseDTO.setAvailabilityStatus(stock.getAvailabilityStatus());
+        stockResponseDTO.setStockCategoryId(stock.getStockCategory().getId());
+        stockResponseDTO.setPetClinicId(stock.getPetClinic().getId());
         return stockResponseDTO;
     }
 }
