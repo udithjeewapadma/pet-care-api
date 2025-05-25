@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/stocks")
 @AllArgsConstructor
@@ -36,6 +38,11 @@ public class StockController {
     @GetMapping("/{stock-id}")
     public StockResponseDTO findStockById(@PathVariable("stock-id") Long stockId) {
         return stockService.findStockById(stockId);
+    }
+
+    @GetMapping
+    public List<StockResponseDTO> findAllStocks() {
+        return stockService.findAllStocks();
     }
 
 }
