@@ -15,4 +15,6 @@ public interface StockService {
     StockResponseDTO findStockById(Long id);
 
     List<StockResponseDTO> findAllStocks();
+
+    void deleteStockById(Long id);
 }

@@ -83,4 +83,9 @@ public class StockServiceImpl implements StockService {
             return stockResponseDTO;
         }).collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteStockById(Long id) {
+        stockRepository.deleteById(id);
+    }
 }
