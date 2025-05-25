@@ -88,4 +88,16 @@ public class StockServiceImpl implements StockService {
     public void deleteStockById(Long id) {
         stockRepository.deleteById(id);
     }
+
+    @Override
+    public Stock updateStock(Long id, CreateStockRequestDTO createStockRequestDTO) {
+
+        Stock existingStock = stockRepository.findById(id)
+                .orElseThrow(() -> new StockNotFoundException("Stock Not Found"));
+        existingStock.setName(createStockRequestDTO.getName());
+        existingStock.setDescription(createStockRequestDTO.getDescription());
+        existingStock.setItemCode(createStockRequestDTO.getItemCode());
+        existingStock.setAvailabilityStatus(createStockRequestDTO.getAvailabilityStatus());
+        return stockRepository.save(existingStock);
+    }
 }
