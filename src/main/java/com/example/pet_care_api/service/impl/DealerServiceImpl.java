@@ -109,10 +109,19 @@ public class DealerServiceImpl implements DealerService {
 
         Dealer existingDealer = dealerRepository.findById(id)
                 .orElseThrow(() -> new DealerNotFoundException("Dealer not found"));
+
+        List<PetClinic> petClinics = petClinicRepository.findAllById(createDealerRequestDTO.getPetClinicIds());
+        if (petClinics.isEmpty() || petClinics.size() != createDealerRequestDTO.getPetClinicIds().size()) {
+            throw new PetClinicNotFoundException("Some PetClinic IDs are invalid");
+        }
+
         existingDealer.setDealerName(createDealerRequestDTO.getDealerName());
         existingDealer.setPhoneNumber(createDealerRequestDTO.getPhoneNumber());
         existingDealer.setEmail(createDealerRequestDTO.getEmail());
         existingDealer.setItemName(createDealerRequestDTO.getItemName());
+        existingDealer.setPetClinics(new ArrayList<>(petClinics));
+
         return dealerRepository.save(existingDealer);
     }
+
 }
