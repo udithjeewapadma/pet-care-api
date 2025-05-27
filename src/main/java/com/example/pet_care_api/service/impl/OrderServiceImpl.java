@@ -1,7 +1,9 @@
 package com.example.pet_care_api.service.impl;
 
 import com.example.pet_care_api.controllers.dto.request.CreateOrderRequestDTO;
+import com.example.pet_care_api.controllers.dto.response.OrderResponseDTO;
 import com.example.pet_care_api.exceptions.DealerNotFoundException;
+import com.example.pet_care_api.exceptions.OrderNotFoundException;
 import com.example.pet_care_api.models.Dealer;
 import com.example.pet_care_api.models.Order;
 import com.example.pet_care_api.models.OrderStatus;
@@ -32,5 +34,20 @@ public class OrderServiceImpl implements OrderService {
         order.setTotalAmount(createOrderRequestDTO.getTotalAmount());
         order.setDealer(dealer);
         return orderRepository.save(order);
+    }
+
+    @Override
+    public OrderResponseDTO findOrderById(Long orderId) throws OrderNotFoundException {
+
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new OrderNotFoundException("Order not found"));
+        OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
+        orderResponseDTO.setId(order.getId());
+        orderResponseDTO.setOrderName(order.getOrderName());
+        orderResponseDTO.setQuantity(order.getQuantity());
+        orderResponseDTO.setTotalAmount(order.getTotalAmount());
+        orderResponseDTO.setOrderStatus(order.getOrderStatus());
+        orderResponseDTO.setDealerId(order.getDealer().getId());
+        return orderResponseDTO;
     }
 }
