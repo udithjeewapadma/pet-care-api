@@ -2,6 +2,7 @@ package com.example.pet_care_api.controllers;
 
 import com.example.pet_care_api.controllers.dto.request.CreateOrderRequestDTO;
 import com.example.pet_care_api.controllers.dto.response.OrderResponseDTO;
+import com.example.pet_care_api.exceptions.OrderNotFoundException;
 import com.example.pet_care_api.models.Order;
 import com.example.pet_care_api.models.OrderStatus;
 import com.example.pet_care_api.service.OrderService;
@@ -29,5 +30,11 @@ public class OrderController {
        orderResponseDTO.setTotalAmount(order.getTotalAmount());
        orderResponseDTO.setDealerId(order.getDealer().getId());
        return orderResponseDTO;
+    }
+
+    @GetMapping("/{order-id}")
+    public OrderResponseDTO findOrderById(@PathVariable("order-id") Long orderId)
+            throws OrderNotFoundException {
+        return orderService.findOrderById(orderId);
     }
 }
