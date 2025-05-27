@@ -50,4 +50,8 @@ public class DealerController {
         return dealerService.findAllDealers();
     }
 
+    @DeleteMapping("/{dealer-id}")
+    private void deleteDealerById(@PathVariable("dealer-id") Long dealerId) {
+        dealerService.deleteDealerById(dealerId);
+    }
 }
