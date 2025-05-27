@@ -44,4 +44,9 @@ public class OrderController {
     public List<OrderResponseDTO> findAllOrders() {
         return orderService.findAllOrders();
     }
+
+    @DeleteMapping("/{order-id}")
+    private void deleteOrderById(@PathVariable("order-id") Long orderId) {
+        orderService.deleteOrderById(orderId);
+    }
 }
