@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DealerServiceImpl implements DealerService {
@@ -70,5 +71,30 @@ public class DealerServiceImpl implements DealerService {
 
         dealerResponseDTO.setPetClinics(petClinicDTOS);
         return dealerResponseDTO;
+    }
+
+    @Override
+    public List<DealerResponseDTO> findAllDealers() {
+        List<Dealer> dealers = dealerRepository.findAll();
+        return dealers.stream().map(dealer -> {
+            DealerResponseDTO dealerResponseDTO = new DealerResponseDTO();
+            dealerResponseDTO.setId(dealer.getId());
+            dealerResponseDTO.setDealerName(dealer.getDealerName());
+            dealerResponseDTO.setPhoneNumber(dealer.getPhoneNumber());
+            dealerResponseDTO.setEmail(dealer.getEmail());
+            dealerResponseDTO.setItemName(dealer.getItemName());
+
+            List<PetClinicDTO> petClinicDTOS = dealer.getPetClinics().stream()
+                    .map(petClinic -> {
+                        PetClinicDTO petClinicDTO = new PetClinicDTO();
+                        petClinicDTO.setId(petClinic.getId());
+                        petClinicDTO.setPetClinicName(petClinic.getClinicName());
+                        return petClinicDTO;
+                    })
+                    .toList();
+            dealerResponseDTO.setPetClinics(petClinicDTOS);
+            return dealerResponseDTO;
+
+        }).collect(Collectors.toList());
     }
 }
