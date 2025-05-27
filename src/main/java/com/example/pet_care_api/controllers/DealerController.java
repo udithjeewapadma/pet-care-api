@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/dealers")
 public class DealerController {
@@ -41,6 +43,11 @@ public class DealerController {
     @GetMapping("/{dealer-id}")
     private DealerResponseDTO getDealerById(@PathVariable("dealer-id") Long dealerId) {
         return dealerService.findDealerById(dealerId);
+    }
+
+    @GetMapping
+    private List<DealerResponseDTO> findAllDealers() {
+        return dealerService.findAllDealers();
     }
 
 }

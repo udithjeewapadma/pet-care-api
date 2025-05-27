@@ -74,6 +74,7 @@ public class DealerServiceImpl implements DealerService {
     }
 
     @Override
+    @Transactional
     public List<DealerResponseDTO> findAllDealers() {
         List<Dealer> dealers = dealerRepository.findAll();
         return dealers.stream().map(dealer -> {
