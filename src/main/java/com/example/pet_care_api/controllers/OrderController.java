@@ -49,4 +49,18 @@ public class OrderController {
     private void deleteOrderById(@PathVariable("order-id") Long orderId) {
         orderService.deleteOrderById(orderId);
     }
+
+    @PutMapping("/{order-id}")
+    private OrderResponseDTO updateOrder(@PathVariable("order-id") Long id,
+                                         @RequestBody CreateOrderRequestDTO createOrderRequestDTO){
+        Order order = orderService.updateOrderById(id, createOrderRequestDTO);
+        OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
+        orderResponseDTO.setId(order.getId());
+        orderResponseDTO.setOrderName(order.getOrderName());
+        orderResponseDTO.setOrderStatus(order.getOrderStatus());
+        orderResponseDTO.setQuantity(order.getQuantity());
+        orderResponseDTO.setTotalAmount(order.getTotalAmount());
+        orderResponseDTO.setDealerId(order.getDealer().getId());
+        return orderResponseDTO;
+    }
 }
