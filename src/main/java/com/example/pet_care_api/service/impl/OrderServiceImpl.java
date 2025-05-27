@@ -13,6 +13,9 @@ import com.example.pet_care_api.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @AllArgsConstructor
 public class OrderServiceImpl implements OrderService {
@@ -49,5 +52,20 @@ public class OrderServiceImpl implements OrderService {
         orderResponseDTO.setOrderStatus(order.getOrderStatus());
         orderResponseDTO.setDealerId(order.getDealer().getId());
         return orderResponseDTO;
+    }
+
+    @Override
+    public List<OrderResponseDTO> findAllOrders() {
+        List<Order> orders = orderRepository.findAll();
+        return orders.stream().map(order -> {
+            OrderResponseDTO orderResponseDTO = new OrderResponseDTO();
+            orderResponseDTO.setId(order.getId());
+            orderResponseDTO.setOrderName(order.getOrderName());
+            orderResponseDTO.setQuantity(order.getQuantity());
+            orderResponseDTO.setTotalAmount(order.getTotalAmount());
+            orderResponseDTO.setOrderStatus(order.getOrderStatus());
+            orderResponseDTO.setDealerId(order.getDealer().getId());
+            return orderResponseDTO;
+        }).collect(Collectors.toList());
     }
 }
