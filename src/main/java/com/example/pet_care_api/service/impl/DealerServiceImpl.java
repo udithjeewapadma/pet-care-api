@@ -1,6 +1,9 @@
 package com.example.pet_care_api.service.impl;
 
 import com.example.pet_care_api.controllers.dto.request.CreateDealerRequestDTO;
+import com.example.pet_care_api.controllers.dto.response.DealerResponseDTO;
+import com.example.pet_care_api.controllers.dto.response.PetClinicDTO;
+import com.example.pet_care_api.exceptions.DealerNotFoundException;
 import com.example.pet_care_api.exceptions.PetClinicNotFoundException;
 import com.example.pet_care_api.models.Dealer;
 import com.example.pet_care_api.models.PetClinic;
@@ -40,5 +43,28 @@ public class DealerServiceImpl implements DealerService {
         dealer.setPetClinics(new ArrayList<>(petClinics));
 
         return dealerRepository.save(dealer);
+    }
+
+    @Override
+    public DealerResponseDTO findDealerById(Long id) {
+
+        Dealer dealer = dealerRepository.findById(id)
+                .orElseThrow(() -> new DealerNotFoundException("Dealer not found"));
+        DealerResponseDTO dealerResponseDTO = new DealerResponseDTO();
+        dealerResponseDTO.setId(dealer.getId());
+        dealerResponseDTO.setDealerName(dealer.getDealerName());
+        dealerResponseDTO.setPhoneNumber(dealer.getPhoneNumber());
+        dealerResponseDTO.setEmail(dealer.getEmail());
+        dealerResponseDTO.setItemName(dealer.getItemName());
+
+        List<PetClinicDTO> petClinicDTOS = dealer.getPetClinics().stream()
+                .map(petClinic -> {
+                    PetClinicDTO petClinicDTO = new PetClinicDTO();
+                    petClinicDTO.setId(petClinic.getId());
+                    petClinicDTO.setPetClinicName(petClinic.getClinicName());
+                    return petClinicDTO;
+                })
+                .toList();
+        return dealerResponseDTO;
     }
 }
