@@ -98,4 +98,9 @@ public class DealerServiceImpl implements DealerService {
 
         }).collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteDealerById(Long id) {
+        dealerRepository.deleteById(id);
+    }
 }

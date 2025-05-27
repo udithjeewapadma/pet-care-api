@@ -13,4 +13,6 @@ public interface DealerService {
     DealerResponseDTO findDealerById(Long id);
 
     List<DealerResponseDTO> findAllDealers();
+
+    void deleteDealerById(Long id);
 }
