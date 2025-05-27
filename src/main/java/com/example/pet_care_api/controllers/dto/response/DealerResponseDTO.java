@@ -12,5 +12,6 @@ public class DealerResponseDTO {
     private String dealerName;
     private String phoneNumber;
     private String email;
+    private String itemName;
     private List<PetClinicDTO> petClinics;
 }

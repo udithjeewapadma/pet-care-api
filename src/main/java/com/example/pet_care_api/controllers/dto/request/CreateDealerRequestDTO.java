@@ -10,5 +10,6 @@ public class CreateDealerRequestDTO {
     private String dealerName;
     private String phoneNumber;
     private String email;
+    private String itemName;
     private List<Long> petClinicIds;
 }

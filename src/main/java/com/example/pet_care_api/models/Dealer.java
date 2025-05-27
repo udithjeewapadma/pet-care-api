@@ -16,6 +16,7 @@ public class Dealer {
     private String dealerName;
     private String phoneNumber;
     private String email;
+    private String itemName;
 
     @ManyToMany(mappedBy = "dealers", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Pharmacy> pharmacies;
