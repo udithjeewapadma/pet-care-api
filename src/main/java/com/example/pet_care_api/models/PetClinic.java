@@ -20,12 +20,7 @@ public class PetClinic {
     @OneToMany(mappedBy = "petClinic", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Doctor> doctors;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "petShop_dealer",
-            joinColumns = @JoinColumn(name = "petClinicId"),
-            inverseJoinColumns = @JoinColumn(name = "dealerId")
-    )
+    @ManyToMany(mappedBy = "petClinics",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Dealer> dealers;
 
     @OneToMany(mappedBy = "petClinic",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
