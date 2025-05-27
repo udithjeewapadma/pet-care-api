@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/orders")
 @AllArgsConstructor
@@ -36,5 +38,10 @@ public class OrderController {
     public OrderResponseDTO findOrderById(@PathVariable("order-id") Long orderId)
             throws OrderNotFoundException {
         return orderService.findOrderById(orderId);
+    }
+
+    @GetMapping
+    public List<OrderResponseDTO> findAllOrders() {
+        return orderService.findAllOrders();
     }
 }
