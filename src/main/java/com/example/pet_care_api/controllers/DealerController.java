@@ -38,4 +38,9 @@ public class DealerController {
         return dealerResponseDTO;
     }
 
+    @GetMapping("/{dealer-id}")
+    private DealerResponseDTO getDealerById(@PathVariable("dealer-id") Long dealerId) {
+        return dealerService.findDealerById(dealerId);
+    }
+
 }
