@@ -68,4 +68,9 @@ public class OrderServiceImpl implements OrderService {
             return orderResponseDTO;
         }).collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteOrderById(Long orderId) {
+        orderRepository.deleteById(orderId);
+    }
 }

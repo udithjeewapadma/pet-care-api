@@ -15,4 +15,6 @@ public interface OrderService {
     OrderResponseDTO findOrderById(Long orderId) throws OrderNotFoundException;
 
     List<OrderResponseDTO> findAllOrders();
+
+    void deleteOrderById(Long orderId);
 }
