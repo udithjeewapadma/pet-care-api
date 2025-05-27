@@ -65,6 +65,8 @@ public class DealerServiceImpl implements DealerService {
                     return petClinicDTO;
                 })
                 .toList();
+
+        dealerResponseDTO.setPetClinics(petClinicDTOS);
         return dealerResponseDTO;
     }
 }

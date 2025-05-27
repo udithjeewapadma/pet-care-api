@@ -28,10 +28,10 @@ public class DealerController {
         dealerResponseDTO.setItemName(dealer.getItemName());
 
         dealerResponseDTO.setPetClinics(dealer.getPetClinics().stream()
-                .map(product -> {
+                .map(petClinic -> {
                     PetClinicDTO petClinicDTO = new PetClinicDTO();
-                    petClinicDTO.setId(product.getId());
-                    petClinicDTO.setPetClinicName(product.getClinicName());
+                    petClinicDTO.setId(petClinic.getId());
+                    petClinicDTO.setPetClinicName(petClinic.getClinicName());
                     return petClinicDTO;
                 })
                 .toList());
