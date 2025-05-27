@@ -30,7 +30,7 @@ public class PetClinicServiceImpl implements PetClinicService {
     }
 
     @Override
-    public PetClinicResponseDTO findPetClinicById(Long id) {
+    public PetClinicResponseDTO findPetClinicById(Long id) throws PetClinicNotFoundException {
 
         PetClinic petClinic = petClinicRepository.findById(id)
                 .orElseThrow(() -> new PetClinicNotFoundException("pet clinic not found"));
@@ -61,7 +61,8 @@ public class PetClinicServiceImpl implements PetClinicService {
     }
 
     @Override
-    public PetClinic updatePetClinic(Long id, CreatePetClinicRequestDTO createPetClinicRequestDTO) {
+    public PetClinic updatePetClinic(Long id, CreatePetClinicRequestDTO createPetClinicRequestDTO)
+            throws PetClinicNotFoundException {
 
         PetClinic existingPetClinic = petClinicRepository.findById(id)
                 .orElseThrow(() -> new PetClinicNotFoundException("pet clinic not found"));

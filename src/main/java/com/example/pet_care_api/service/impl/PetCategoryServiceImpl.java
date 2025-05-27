@@ -28,7 +28,7 @@ public class PetCategoryServiceImpl implements PetCategoryService {
     }
 
     @Override
-    public PetCategoryResponseDTO findPetCategoryById(Long id) {
+    public PetCategoryResponseDTO findPetCategoryById(Long id) throws PetCategoryNotFoundException {
 
         PetCategory petCategory = petCategoryRepository.findById(id)
                 .orElseThrow( () -> new PetCategoryNotFoundException("Pet Category Not Found"));
@@ -55,7 +55,8 @@ public class PetCategoryServiceImpl implements PetCategoryService {
     }
 
     @Override
-    public PetCategory updatePetCategory(Long id, CreatePetCategoryRequestDTO createPetCategoryRequestDTO) {
+    public PetCategory updatePetCategory(Long id, CreatePetCategoryRequestDTO createPetCategoryRequestDTO)
+            throws PetCategoryNotFoundException {
 
         PetCategory existingPetCategory = petCategoryRepository.findById(id)
                 .orElseThrow( () -> new PetCategoryNotFoundException("Pet Category Not Found"));

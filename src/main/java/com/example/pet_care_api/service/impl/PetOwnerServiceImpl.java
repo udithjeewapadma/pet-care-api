@@ -30,7 +30,7 @@ public class PetOwnerServiceImpl implements PetOwnerService {
     }
 
     @Override
-    public PetOwnerResponseDTO findPetOwnerById(Long id) {
+    public PetOwnerResponseDTO findPetOwnerById(Long id) throws PetOwnerNotFoundException {
 
         PetOwner petOwner = petOwnerRepository.findById(id)
                 .orElseThrow(() -> new PetOwnerNotFoundException("Pet Owner Not Found"));
@@ -63,7 +63,8 @@ public class PetOwnerServiceImpl implements PetOwnerService {
     }
 
     @Override
-    public PetOwner updatePetOwner(Long id, CreatePetOwnerRequestDTO createPetOwnerRequestDTO) {
+    public PetOwner updatePetOwner(Long id, CreatePetOwnerRequestDTO createPetOwnerRequestDTO)
+            throws PetOwnerNotFoundException {
 
         PetOwner existingPetOwner = petOwnerRepository.findById(id)
                 .orElseThrow(() -> new PetOwnerNotFoundException("Pet Owner Not Found"));

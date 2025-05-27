@@ -49,7 +49,7 @@ public class DealerServiceImpl implements DealerService {
 
     @Override
     @Transactional
-    public DealerResponseDTO findDealerById(Long id) {
+    public DealerResponseDTO findDealerById(Long id) throws DealerNotFoundException {
 
         Dealer dealer = dealerRepository.findById(id)
                 .orElseThrow(() -> new DealerNotFoundException("Dealer not found"));
@@ -105,7 +105,8 @@ public class DealerServiceImpl implements DealerService {
     }
 
     @Override
-    public Dealer updateDealerById(Long id, CreateDealerRequestDTO createDealerRequestDTO) {
+    public Dealer updateDealerById(Long id, CreateDealerRequestDTO createDealerRequestDTO)
+            throws DealerNotFoundException, PetClinicNotFoundException {
 
         Dealer existingDealer = dealerRepository.findById(id)
                 .orElseThrow(() -> new DealerNotFoundException("Dealer not found"));

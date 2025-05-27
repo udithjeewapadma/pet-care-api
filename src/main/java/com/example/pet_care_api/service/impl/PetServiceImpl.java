@@ -50,7 +50,11 @@ public class PetServiceImpl implements PetService {
     @Override
     public PetResponseDTO createPet(Long doctorId,
                          Long petCategoryId,
-                         Long petOwnerId, CreatePetRequestDTO createPetRequestDTO) throws IOException {
+                         Long petOwnerId, CreatePetRequestDTO createPetRequestDTO)
+            throws IOException,
+            PetCategoryNotFoundException,
+            PetOwnerNotFoundException,
+            DoctorNotFoundException {
 
         PetCategory petCategory = petCategoryRepository.findById(petCategoryId)
                 .orElseThrow(() -> new PetCategoryNotFoundException("Pet Category Not Found"));
@@ -101,7 +105,7 @@ public class PetServiceImpl implements PetService {
 
     @Override
     @Transactional
-    public PetResponseDTO getPetById(Long petId) {
+    public PetResponseDTO getPetById(Long petId) throws PetNotFoundException {
 
         Pet pet = petRepository.findById(petId)
                 .orElseThrow(() -> new PetNotFoundException("Pet Not Found"));
@@ -141,7 +145,8 @@ public class PetServiceImpl implements PetService {
 
     @Override
     @Transactional
-    public PetResponseDTO updatePet(Long id, CreatePetRequestDTO request) throws IOException {
+    public PetResponseDTO updatePet(Long id, CreatePetRequestDTO request)
+            throws IOException, PetNotFoundException {
         Pet pet = petRepository.findById(id).orElseThrow(() -> new PetNotFoundException("Pet not found"));
 
         pet.setPetName(request.getPetName());

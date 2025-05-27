@@ -24,7 +24,7 @@ public class BreedServiceImpl implements BreedService {
     private PetCategoryRepository petCategoryRepository;
 
     @Override
-    public Breed createBreed(Long petCategoryId, CreateBreedRequestDTO createBreedRequestDTO) {
+    public Breed createBreed(Long petCategoryId, CreateBreedRequestDTO createBreedRequestDTO) throws PetCategoryNotFoundException {
 
         PetCategory petCategory = petCategoryRepository.findById(petCategoryId)
                 .orElseThrow(() -> new PetCategoryNotFoundException("pet category not found"));
@@ -36,7 +36,7 @@ public class BreedServiceImpl implements BreedService {
     }
 
     @Override
-    public BreedResponseDTO getBreedById(Long id) {
+    public BreedResponseDTO getBreedById(Long id) throws BreedNotFoundException {
 
         Breed breed = breedRepository.findById(id)
                 .orElseThrow(() -> new BreedNotFoundException("Breed Not Found"));
@@ -65,7 +65,7 @@ public class BreedServiceImpl implements BreedService {
     }
 
     @Override
-    public Breed updateBreeById(Long id, CreateBreedRequestDTO createBreedRequestDTO) {
+    public Breed updateBreeById(Long id, CreateBreedRequestDTO createBreedRequestDTO) throws BreedNotFoundException{
         Breed existingBreed = breedRepository.findById(id)
                 .orElseThrow(() -> new BreedNotFoundException("Breed Not Found"));
 

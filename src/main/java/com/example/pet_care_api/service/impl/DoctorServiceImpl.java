@@ -8,7 +8,6 @@ import com.example.pet_care_api.models.Doctor;
 import com.example.pet_care_api.models.PetClinic;
 import com.example.pet_care_api.repositories.DoctorRepository;
 import com.example.pet_care_api.repositories.PetClinicRepository;
-import com.example.pet_care_api.repositories.PetRepository;
 import com.example.pet_care_api.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,7 @@ public class DoctorServiceImpl implements DoctorService {
 
 
     @Override
-    public Doctor createDoctor(Long petClinicId,CreateDoctorRequestDTO createDoctorRequestDTO) {
+    public Doctor createDoctor(Long petClinicId,CreateDoctorRequestDTO createDoctorRequestDTO) throws PetClinicNotFoundException {
 
         PetClinic petClinic = petClinicRepository.findById(petClinicId)
                 .orElseThrow(() -> new PetClinicNotFoundException("pet clinic not found"));
@@ -41,7 +40,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public DoctorResponseDTO findDoctorById(Long id) {
+    public DoctorResponseDTO findDoctorById(Long id) throws DoctorNotFoundException {
 
         Doctor doctor = doctorRepository.findById(id)
                 .orElseThrow(() -> new DoctorNotFoundException("Doctor not found"));
@@ -74,7 +73,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public Doctor updateDoctor(Long id, CreateDoctorRequestDTO createDoctorRequestDTO) {
+    public Doctor updateDoctor(Long id, CreateDoctorRequestDTO createDoctorRequestDTO) throws DoctorNotFoundException {
 
         Doctor existingDoctor = doctorRepository.findById(id)
                 .orElseThrow(() -> new DoctorNotFoundException("Doctor not found"));

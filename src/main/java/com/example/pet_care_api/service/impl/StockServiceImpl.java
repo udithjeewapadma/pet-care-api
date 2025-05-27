@@ -34,7 +34,8 @@ public class StockServiceImpl implements StockService {
 
     @Override
     public Stock createStock(Long stockCategoryId, Long petClinicId,
-                             CreateStockRequestDTO createStockRequestDTO) {
+                             CreateStockRequestDTO createStockRequestDTO)
+            throws PetClinicNotFoundException, StockCategoryNotFoundException {
 
         StockCategory stockCategory = stockCategoryRepository.findById(stockCategoryId)
                 .orElseThrow(() -> new StockCategoryNotFoundException("Stock Category Not Found"));
@@ -53,7 +54,7 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public StockResponseDTO findStockById(Long id) {
+    public StockResponseDTO findStockById(Long id) throws StockNotFoundException {
 
         Stock stock = stockRepository.findById(id)
                 .orElseThrow(() -> new StockNotFoundException("Stock Not Found"));
@@ -90,7 +91,7 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public Stock updateStock(Long id, CreateStockRequestDTO createStockRequestDTO) {
+    public Stock updateStock(Long id, CreateStockRequestDTO createStockRequestDTO) throws StockNotFoundException {
 
         Stock existingStock = stockRepository.findById(id)
                 .orElseThrow(() -> new StockNotFoundException("Stock Not Found"));

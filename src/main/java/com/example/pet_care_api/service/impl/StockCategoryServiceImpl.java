@@ -27,7 +27,7 @@ public class StockCategoryServiceImpl implements StockCategoryService {
     }
 
     @Override
-    public StockCategoryResponseDTO findStockCategoryById(Long id) {
+    public StockCategoryResponseDTO findStockCategoryById(Long id) throws StockCategoryNotFoundException {
 
         StockCategory stockCategory = stockCategoryRepository.findById(id)
                 .orElseThrow(() -> new StockCategoryNotFoundException("Stock Category Not Found"));
@@ -54,7 +54,8 @@ public class StockCategoryServiceImpl implements StockCategoryService {
     }
 
     @Override
-    public StockCategory updateStockCategory(Long id, CreateStockCategoryRequestDTO createStockCategoryRequestDTO) {
+    public StockCategory updateStockCategory(Long id, CreateStockCategoryRequestDTO createStockCategoryRequestDTO)
+            throws StockCategoryNotFoundException {
 
         StockCategory existingStockCategory = stockCategoryRepository.findById(id)
                 .orElseThrow(() -> new StockCategoryNotFoundException("Stock Category Not Found"));
