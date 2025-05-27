@@ -29,14 +29,14 @@ public class DealerController {
         dealerResponseDTO.setPhoneNumber(dealer.getPhoneNumber());
         dealerResponseDTO.setItemName(dealer.getItemName());
 
-        dealerResponseDTO.setPetClinics(dealer.getPetClinics().stream()
-                .map(petClinic -> {
-                    PetClinicDTO petClinicDTO = new PetClinicDTO();
-                    petClinicDTO.setId(petClinic.getId());
-                    petClinicDTO.setPetClinicName(petClinic.getClinicName());
-                    return petClinicDTO;
-                })
-                .toList());
+//        dealerResponseDTO.setPetClinics(dealer.getPetClinics().stream()
+//                .map(petClinic -> {
+//                    PetClinicDTO petClinicDTO = new PetClinicDTO();
+//                    petClinicDTO.setId(petClinic.getId());
+//                    petClinicDTO.setPetClinicName(petClinic.getClinicName());
+//                    return petClinicDTO;
+//                })
+//                .toList());
         return dealerResponseDTO;
     }
 
@@ -53,5 +53,30 @@ public class DealerController {
     @DeleteMapping("/{dealer-id}")
     private void deleteDealerById(@PathVariable("dealer-id") Long dealerId) {
         dealerService.deleteDealerById(dealerId);
+    }
+
+    @PutMapping("/{dealer-id}")
+    private DealerResponseDTO updateDealerById(@PathVariable("dealer-id") Long dealerId, @RequestBody CreateDealerRequestDTO createDealerRequestDTO) {
+
+        Dealer updatedDealer = dealerService.updateDealerById(dealerId, createDealerRequestDTO);
+
+        DealerResponseDTO responseDTO = new DealerResponseDTO();
+        responseDTO.setId(updatedDealer.getId());
+        responseDTO.setDealerName(updatedDealer.getDealerName());
+        responseDTO.setPhoneNumber(updatedDealer.getPhoneNumber());
+        responseDTO.setEmail(updatedDealer.getEmail());
+        responseDTO.setItemName(updatedDealer.getItemName());
+
+        List<PetClinicDTO> petClinicDTOS = updatedDealer.getPetClinics().stream()
+                .map(petClinic -> {
+                    PetClinicDTO petClinicDTO = new PetClinicDTO();
+                    petClinicDTO.setId(petClinic.getId());
+                    petClinicDTO.setPetClinicName(petClinic.getClinicName());
+                    return petClinicDTO;
+                })
+                .toList();
+        responseDTO.setPetClinics(petClinicDTOS);
+        return responseDTO;
+
     }
 }
