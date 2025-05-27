@@ -103,4 +103,16 @@ public class DealerServiceImpl implements DealerService {
     public void deleteDealerById(Long id) {
         dealerRepository.deleteById(id);
     }
+
+    @Override
+    public Dealer updateDealerById(Long id, CreateDealerRequestDTO createDealerRequestDTO) {
+
+        Dealer existingDealer = dealerRepository.findById(id)
+                .orElseThrow(() -> new DealerNotFoundException("Dealer not found"));
+        existingDealer.setDealerName(createDealerRequestDTO.getDealerName());
+        existingDealer.setPhoneNumber(createDealerRequestDTO.getPhoneNumber());
+        existingDealer.setEmail(createDealerRequestDTO.getEmail());
+        existingDealer.setItemName(createDealerRequestDTO.getItemName());
+        return dealerRepository.save(existingDealer);
+    }
 }
