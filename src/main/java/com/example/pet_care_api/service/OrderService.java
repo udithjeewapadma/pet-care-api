@@ -5,6 +5,7 @@ import com.example.pet_care_api.controllers.dto.response.OrderResponseDTO;
 import com.example.pet_care_api.exceptions.DealerNotFoundException;
 import com.example.pet_care_api.exceptions.OrderNotFoundException;
 import com.example.pet_care_api.models.Order;
+import org.aspectj.weaver.ast.Or;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface OrderService {
     List<OrderResponseDTO> findAllOrders();
 
     void deleteOrderById(Long orderId);
+
+    Order updateOrderById(Long id, CreateOrderRequestDTO createOrderRequestDTO) throws OrderNotFoundException;
 }

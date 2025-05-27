@@ -73,4 +73,19 @@ public class OrderServiceImpl implements OrderService {
     public void deleteOrderById(Long orderId) {
         orderRepository.deleteById(orderId);
     }
+
+    @Override
+    public Order updateOrderById(Long id, CreateOrderRequestDTO createOrderRequestDTO)
+            throws OrderNotFoundException {
+
+        Order existingOrder = orderRepository.findById(id)
+                .orElseThrow(() -> new OrderNotFoundException("Order not found"));
+
+        existingOrder.setOrderName(createOrderRequestDTO.getOrderName());
+        existingOrder.setQuantity(createOrderRequestDTO.getQuantity());
+        existingOrder.setOrderStatus(createOrderRequestDTO.getOrderStatus());
+        existingOrder.setTotalAmount(createOrderRequestDTO.getTotalAmount());
+
+        return orderRepository.save(existingOrder);
+    }
 }
