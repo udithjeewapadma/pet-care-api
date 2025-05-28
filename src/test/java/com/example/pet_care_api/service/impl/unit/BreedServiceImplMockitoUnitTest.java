@@ -1,4 +1,4 @@
-package com.example.pet_care_api.service.impl;
+package com.example.pet_care_api.service.impl.unit;
 
 import com.example.pet_care_api.controllers.dto.request.CreateBreedRequestDTO;
 import com.example.pet_care_api.controllers.dto.response.BreedResponseDTO;
@@ -8,6 +8,7 @@ import com.example.pet_care_api.models.Breed;
 import com.example.pet_care_api.models.PetCategory;
 import com.example.pet_care_api.repositories.BreedRepository;
 import com.example.pet_care_api.repositories.PetCategoryRepository;
+import com.example.pet_care_api.service.impl.BreedServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
