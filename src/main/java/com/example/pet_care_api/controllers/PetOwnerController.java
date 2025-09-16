@@ -4,18 +4,21 @@ import com.example.pet_care_api.controllers.dto.request.CreatePetOwnerRequestDTO
 import com.example.pet_care_api.controllers.dto.response.PetOwnerResponseDTO;
 import com.example.pet_care_api.models.PetOwner;
 import com.example.pet_care_api.service.PetOwnerService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/owners")
+@PreAuthorize("hasRole('USER')")
+@AllArgsConstructor
 public class PetOwnerController {
 
-    @Autowired
-    private PetOwnerService petOwnerService;
+    private final PetOwnerService petOwnerService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -41,6 +44,7 @@ public class PetOwnerController {
         return petOwnerService.findAllPetOwners();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{pet-owner-id}")
     public void deletePetOwnerById(@PathVariable("pet-owner-id") Long petOwnerId) {
         petOwnerService.deletePetOwnerById(petOwnerId);

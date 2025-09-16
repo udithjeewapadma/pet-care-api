@@ -6,12 +6,14 @@ import com.example.pet_care_api.models.Stock;
 import com.example.pet_care_api.service.StockService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/stocks")
+@PreAuthorize("hasRole('ADMIN')")
 @AllArgsConstructor
 public class StockController {
 
@@ -51,7 +53,7 @@ public class StockController {
     }
 
     @PutMapping("/{stock-id}")
-    private StockResponseDTO updateStock(@PathVariable("stock-id") Long id,
+    public StockResponseDTO updateStock(@PathVariable("stock-id") Long id,
                                          @RequestBody CreateStockRequestDTO createStockRequestDTO) {
 
         Stock stock = stockService.updateStock(id, createStockRequestDTO);

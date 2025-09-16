@@ -4,22 +4,25 @@ import com.example.pet_care_api.controllers.dto.request.CreatePetCategoryRequest
 import com.example.pet_care_api.controllers.dto.response.PetCategoryResponseDTO;
 import com.example.pet_care_api.models.PetCategory;
 import com.example.pet_care_api.service.PetCategoryService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/categories")
+@PreAuthorize("hasRole('ADMIN')")
+@AllArgsConstructor
 public class PetCategoryController {
 
-    @Autowired
-    private PetCategoryService petCategoryService;
+    private final PetCategoryService petCategoryService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private PetCategoryResponseDTO createPetCategory(@RequestBody CreatePetCategoryRequestDTO createPetCategoryRequestDTO) {
+    public PetCategoryResponseDTO createPetCategory(@RequestBody CreatePetCategoryRequestDTO createPetCategoryRequestDTO) {
         PetCategory petCategory = petCategoryService.createPetCategory(createPetCategoryRequestDTO);
         PetCategoryResponseDTO petCategoryResponseDTO = new PetCategoryResponseDTO();
         petCategoryResponseDTO.setId(petCategory.getId());
@@ -28,22 +31,22 @@ public class PetCategoryController {
     }
 
     @GetMapping("/{pet-category-id}")
-    private PetCategoryResponseDTO getPetCategoryById(@PathVariable("pet-category-id") Long petCategoryId) {
+    public PetCategoryResponseDTO getPetCategoryById(@PathVariable("pet-category-id") Long petCategoryId) {
         return petCategoryService.findPetCategoryById(petCategoryId);
     }
 
     @GetMapping
-    private List<PetCategoryResponseDTO> getAllPetCategories() {
+    public List<PetCategoryResponseDTO> getAllPetCategories() {
         return petCategoryService.getAllPetCategories();
     }
 
     @DeleteMapping("/{pet-category-id}")
-    private void deletePetCategoryById(@PathVariable("pet-category-id") Long petCategoryId) {
+    public void deletePetCategoryById(@PathVariable("pet-category-id") Long petCategoryId) {
         petCategoryService.deletePetCategoryById(petCategoryId);
     }
 
     @PutMapping("/{pet-category-id}")
-    private PetCategoryResponseDTO updatePetCategory(@PathVariable("pet-category-id") Long id,
+    public PetCategoryResponseDTO updatePetCategory(@PathVariable("pet-category-id") Long id,
                                                      @RequestBody CreatePetCategoryRequestDTO createPetCategoryRequestDTO) {
         PetCategory petCategory = petCategoryService.updatePetCategory(id, createPetCategoryRequestDTO);
         PetCategoryResponseDTO petCategoryResponseDTO = new PetCategoryResponseDTO();

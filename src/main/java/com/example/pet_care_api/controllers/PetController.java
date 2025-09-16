@@ -4,8 +4,10 @@ import com.example.pet_care_api.controllers.dto.request.CreatePetRequestDTO;
 import com.example.pet_care_api.controllers.dto.response.PetResponseDTO;
 import com.example.pet_care_api.models.Pet;
 import com.example.pet_care_api.service.PetService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -13,10 +15,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pets")
+@PreAuthorize("hasRole('USER')")
+@AllArgsConstructor
 public class PetController {
 
-    @Autowired
-    private PetService petService;
+    private final PetService petService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -40,7 +43,7 @@ public class PetController {
     }
 
     @DeleteMapping("/{pet-id}")
-    private void deletePetById(@PathVariable("pet-id") Long petId) {
+    public void deletePetById(@PathVariable("pet-id") Long petId) {
         petService.deletePetById(petId);
     }
 

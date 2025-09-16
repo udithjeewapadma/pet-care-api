@@ -4,22 +4,26 @@ import com.example.pet_care_api.controllers.dto.request.CreatePetClinicRequestDT
 import com.example.pet_care_api.controllers.dto.response.PetClinicResponseDTO;
 import com.example.pet_care_api.models.PetClinic;
 import com.example.pet_care_api.service.PetClinicService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/clinics")
+@PreAuthorize("hasRole('ADMIN')")
+@AllArgsConstructor
 public class PetClinicController {
 
-    @Autowired
-    private PetClinicService petClinicService;
+
+    private final PetClinicService petClinicService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private PetClinicResponseDTO createPetClinic(@RequestBody CreatePetClinicRequestDTO createPetClinicRequestDTO) {
+    public PetClinicResponseDTO createPetClinic(@RequestBody CreatePetClinicRequestDTO createPetClinicRequestDTO) {
 
         PetClinic petClinic = petClinicService.createPetClinic(createPetClinicRequestDTO);
         PetClinicResponseDTO petClinicResponseDTO = new PetClinicResponseDTO();
@@ -31,22 +35,22 @@ public class PetClinicController {
     }
 
     @GetMapping("/{pet-clinic-id}")
-    private PetClinicResponseDTO findPetClinicById(@PathVariable("pet-clinic-id") Long id) {
+    public PetClinicResponseDTO findPetClinicById(@PathVariable("pet-clinic-id") Long id) {
         return petClinicService.findPetClinicById(id);
     }
 
     @GetMapping
-    private List<PetClinicResponseDTO> findAllPetClinics() {
+    public List<PetClinicResponseDTO> findAllPetClinics() {
         return petClinicService.findAllPetClinics();
     }
 
     @DeleteMapping("/{pet-clinic-id}")
-    private void deletePetClinicById(@PathVariable("pet-clinic-id") Long id) {
+    public void deletePetClinicById(@PathVariable("pet-clinic-id") Long id) {
         petClinicService.deletePetClinicById(id);
     }
 
     @PutMapping("/{pet-clinic-id}")
-    private PetClinicResponseDTO updatePetClinic(@PathVariable("pet-clinic-id") Long id, @RequestBody CreatePetClinicRequestDTO createPetClinicRequestDTO) {
+    public PetClinicResponseDTO updatePetClinic(@PathVariable("pet-clinic-id") Long id, @RequestBody CreatePetClinicRequestDTO createPetClinicRequestDTO) {
 
         PetClinic petClinic = petClinicService.updatePetClinic(id, createPetClinicRequestDTO);
         PetClinicResponseDTO petClinicResponseDTO = new PetClinicResponseDTO();

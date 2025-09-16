@@ -4,18 +4,21 @@ import com.example.pet_care_api.controllers.dto.request.CreateBreedRequestDTO;
 import com.example.pet_care_api.controllers.dto.response.BreedResponseDTO;
 import com.example.pet_care_api.models.Breed;
 import com.example.pet_care_api.service.BreedService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/breeds")
+@PreAuthorize("hasRole('ADMIN')")
+@AllArgsConstructor
 public class BreedController {
 
-    @Autowired
-    private BreedService breedService;
+    private final BreedService breedService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -43,7 +46,7 @@ public class BreedController {
     }
 
     @DeleteMapping("/{breed-id}")
-    private void deleteBreedById(@PathVariable("breed-id") Long breedId) {
+    public void deleteBreedById(@PathVariable("breed-id") Long breedId) {
         breedService.deleteBreedById(breedId);
     }
 

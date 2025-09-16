@@ -8,6 +8,7 @@ import com.example.pet_care_api.models.OrderStatus;
 import com.example.pet_care_api.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/orders")
 @AllArgsConstructor
+@PreAuthorize("hasRole('ADMIN')")
 public class OrderController {
 
     private final OrderService orderService;
@@ -46,12 +48,12 @@ public class OrderController {
     }
 
     @DeleteMapping("/{order-id}")
-    private void deleteOrderById(@PathVariable("order-id") Long orderId) {
+    public void deleteOrderById(@PathVariable("order-id") Long orderId) {
         orderService.deleteOrderById(orderId);
     }
 
     @PutMapping("/{order-id}")
-    private OrderResponseDTO updateOrder(@PathVariable("order-id") Long id,
+    public OrderResponseDTO updateOrder(@PathVariable("order-id") Long id,
                                          @RequestBody CreateOrderRequestDTO createOrderRequestDTO){
         Order order = orderService.updateOrderById(id, createOrderRequestDTO);
         OrderResponseDTO orderResponseDTO = new OrderResponseDTO();

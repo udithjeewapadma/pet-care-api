@@ -5,22 +5,25 @@ import com.example.pet_care_api.controllers.dto.response.DealerResponseDTO;
 import com.example.pet_care_api.controllers.dto.response.PetClinicDTO;
 import com.example.pet_care_api.models.Dealer;
 import com.example.pet_care_api.service.DealerService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/dealers")
+@PreAuthorize("hasRole('ADMIN')")
+@AllArgsConstructor
 public class DealerController {
 
-    @Autowired
-    private DealerService dealerService;
+    private final DealerService dealerService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    private DealerResponseDTO createDealer(@RequestBody CreateDealerRequestDTO createDealerRequestDTO) {
+    public DealerResponseDTO createDealer(@RequestBody CreateDealerRequestDTO createDealerRequestDTO) {
         Dealer dealer = dealerService.createDealer(createDealerRequestDTO);
         DealerResponseDTO dealerResponseDTO = new DealerResponseDTO();
         dealerResponseDTO.setId(dealer.getId());
@@ -41,12 +44,12 @@ public class DealerController {
     }
 
     @GetMapping("/{dealer-id}")
-    private DealerResponseDTO getDealerById(@PathVariable("dealer-id") Long dealerId) {
+    public DealerResponseDTO getDealerById(@PathVariable("dealer-id") Long dealerId) {
         return dealerService.findDealerById(dealerId);
     }
 
     @GetMapping
-    private List<DealerResponseDTO> findAllDealers() {
+    public List<DealerResponseDTO> findAllDealers() {
         return dealerService.findAllDealers();
     }
 
@@ -56,7 +59,7 @@ public class DealerController {
     }
 
     @PutMapping("/{dealer-id}")
-    private DealerResponseDTO updateDealerById(@PathVariable("dealer-id") Long dealerId, @RequestBody CreateDealerRequestDTO createDealerRequestDTO) {
+    public DealerResponseDTO updateDealerById(@PathVariable("dealer-id") Long dealerId, @RequestBody CreateDealerRequestDTO createDealerRequestDTO) {
 
         Dealer updatedDealer = dealerService.updateDealerById(dealerId, createDealerRequestDTO);
 

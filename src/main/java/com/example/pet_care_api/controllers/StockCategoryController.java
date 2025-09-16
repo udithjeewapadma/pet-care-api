@@ -4,18 +4,22 @@ import com.example.pet_care_api.controllers.dto.request.CreateStockCategoryReque
 import com.example.pet_care_api.controllers.dto.response.StockCategoryResponseDTO;
 import com.example.pet_care_api.models.StockCategory;
 import com.example.pet_care_api.service.StockCategoryService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/stockCategories")
+@PreAuthorize("hasRole('ADMIN')")
+@AllArgsConstructor
 public class StockCategoryController {
 
-    @Autowired
-    private StockCategoryService stockCategoryService;
+
+    private final StockCategoryService stockCategoryService;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -42,12 +46,12 @@ public class StockCategoryController {
     }
 
     @DeleteMapping("/{stock-category-id}")
-    private void deleteStockCategoryById(@PathVariable("stock-category-id") Long stockCategoryId) {
+    public void deleteStockCategoryById(@PathVariable("stock-category-id") Long stockCategoryId) {
         stockCategoryService.deleteStockCategoryById(stockCategoryId);
     }
 
     @PutMapping("/{stock-category-id}")
-    private StockCategoryResponseDTO updateStockCategory(
+    public StockCategoryResponseDTO updateStockCategory(
             @PathVariable("stock-category-id") Long id,
             @RequestBody CreateStockCategoryRequestDTO createStockCategoryRequestDTO) {
 
