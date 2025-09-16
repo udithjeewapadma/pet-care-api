@@ -68,8 +68,11 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public void deleteDoctorById(Long id) {
-         doctorRepository.deleteById(id);
+    public void deleteDoctorById(Long id) throws DoctorNotFoundException {
+        if (!doctorRepository.existsById(id)) {
+            throw new DoctorNotFoundException("Doctor with ID " + id + " not found.");
+        }
+        doctorRepository.deleteById(id);
     }
 
     @Override

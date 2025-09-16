@@ -58,7 +58,10 @@ public class PetOwnerServiceImpl implements PetOwnerService {
     }
 
     @Override
-    public void deletePetOwnerById(Long id) {
+    public void deletePetOwnerById(Long id) throws PetOwnerNotFoundException {
+        if(!petOwnerRepository.existsById(id)) {
+            throw new PetOwnerNotFoundException("Pet Owner with ID " + id + " not found.");
+        }
         petOwnerRepository.deleteById(id);
     }
 

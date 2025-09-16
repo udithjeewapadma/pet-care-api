@@ -86,7 +86,10 @@ public class StockServiceImpl implements StockService {
     }
 
     @Override
-    public void deleteStockById(Long id) {
+    public void deleteStockById(Long id) throws StockNotFoundException {
+        if(!stockRepository.existsById(id)) {
+            throw new StockNotFoundException("Stock  with ID " + id + " not found.");
+        }
         stockRepository.deleteById(id);
     }
 

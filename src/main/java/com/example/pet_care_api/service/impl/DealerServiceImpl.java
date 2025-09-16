@@ -100,7 +100,10 @@ public class DealerServiceImpl implements DealerService {
     }
 
     @Override
-    public void deleteDealerById(Long id) {
+    public void deleteDealerById(Long id) throws DealerNotFoundException {
+        if (!dealerRepository.existsById(id)) {
+            throw new DealerNotFoundException("Dealer with ID " + id + " not found.");
+        }
         dealerRepository.deleteById(id);
     }
 

@@ -139,7 +139,10 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public void deletePetById(Long petId) {
+    public void deletePetById(Long petId) throws PetNotFoundException {
+        if(!petRepository.existsById(petId)) {
+            throw new PetNotFoundException("Pet with ID " + petId + " not found.");
+        }
         petRepository.deleteById(petId);
     }
 

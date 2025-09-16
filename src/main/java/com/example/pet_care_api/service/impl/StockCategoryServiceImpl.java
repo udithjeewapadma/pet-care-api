@@ -49,7 +49,10 @@ public class StockCategoryServiceImpl implements StockCategoryService {
     }
 
     @Override
-    public void deleteStockCategoryById(Long id) {
+    public void deleteStockCategoryById(Long id) throws StockCategoryNotFoundException {
+        if(!stockCategoryRepository.existsById(id)) {
+            throw new StockCategoryNotFoundException("Stock Category with ID " + id + " not found.");
+        }
         stockCategoryRepository.deleteById(id);
     }
 

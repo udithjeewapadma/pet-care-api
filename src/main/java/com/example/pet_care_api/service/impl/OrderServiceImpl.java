@@ -70,7 +70,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrderById(Long orderId) {
+    public void deleteOrderById(Long orderId) throws OrderNotFoundException {
+        if (!orderRepository.existsById(orderId)) {
+            throw new OrderNotFoundException("Order with ID " + orderId + " not found.");
+        }
         orderRepository.deleteById(orderId);
     }
 

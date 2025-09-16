@@ -60,7 +60,10 @@ public class BreedServiceImpl implements BreedService {
     }
 
     @Override
-    public void deleteBreedById(Long id) {
+    public void deleteBreedById(Long id) throws BreedNotFoundException {
+        if (!breedRepository.existsById(id)) {
+            throw new BreedNotFoundException("Breed with ID " + id + " not found.");
+        }
         breedRepository.deleteById(id);
     }
 

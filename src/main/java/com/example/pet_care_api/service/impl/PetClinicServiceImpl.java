@@ -56,7 +56,10 @@ public class PetClinicServiceImpl implements PetClinicService {
     }
 
     @Override
-    public void deletePetClinicById(Long id) {
+    public void deletePetClinicById(Long id) throws PetClinicNotFoundException {
+        if(!petClinicRepository.existsById(id)) {
+            throw new PetClinicNotFoundException("Pet Clinic with ID " + id + " not found.");
+        }
         petClinicRepository.deleteById(id);
     }
 

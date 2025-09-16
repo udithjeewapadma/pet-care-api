@@ -50,7 +50,10 @@ public class PetCategoryServiceImpl implements PetCategoryService {
     }
 
     @Override
-    public void deletePetCategoryById(Long id) {
+    public void deletePetCategoryById(Long id) throws PetCategoryNotFoundException {
+        if(!petCategoryRepository.existsById(id)) {
+            throw new PetCategoryNotFoundException("Pet Category with ID " + id + " not found.");
+        }
         petCategoryRepository.deleteById(id);
     }
 
