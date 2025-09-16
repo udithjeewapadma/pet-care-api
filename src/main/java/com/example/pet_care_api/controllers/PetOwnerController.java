@@ -4,6 +4,7 @@ import com.example.pet_care_api.controllers.dto.request.CreatePetOwnerRequestDTO
 import com.example.pet_care_api.controllers.dto.response.PetOwnerResponseDTO;
 import com.example.pet_care_api.models.PetOwner;
 import com.example.pet_care_api.service.PetOwnerService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class PetOwnerController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PetOwnerResponseDTO createPetOwner(@RequestBody CreatePetOwnerRequestDTO createPetOwnerRequestDTO) {
+    public PetOwnerResponseDTO createPetOwner(@Valid @RequestBody CreatePetOwnerRequestDTO createPetOwnerRequestDTO) {
 
         PetOwner petOwner = petOwnerService.createPetOwner(createPetOwnerRequestDTO);
 

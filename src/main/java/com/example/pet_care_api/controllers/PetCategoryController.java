@@ -4,6 +4,7 @@ import com.example.pet_care_api.controllers.dto.request.CreatePetCategoryRequest
 import com.example.pet_care_api.controllers.dto.response.PetCategoryResponseDTO;
 import com.example.pet_care_api.models.PetCategory;
 import com.example.pet_care_api.service.PetCategoryService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class PetCategoryController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public PetCategoryResponseDTO createPetCategory(@RequestBody CreatePetCategoryRequestDTO createPetCategoryRequestDTO) {
+    public PetCategoryResponseDTO createPetCategory(@Valid @RequestBody CreatePetCategoryRequestDTO createPetCategoryRequestDTO) {
         PetCategory petCategory = petCategoryService.createPetCategory(createPetCategoryRequestDTO);
         PetCategoryResponseDTO petCategoryResponseDTO = new PetCategoryResponseDTO();
         petCategoryResponseDTO.setId(petCategory.getId());

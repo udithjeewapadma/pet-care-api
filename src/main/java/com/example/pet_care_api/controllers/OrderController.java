@@ -6,6 +6,7 @@ import com.example.pet_care_api.exceptions.OrderNotFoundException;
 import com.example.pet_care_api.models.Order;
 import com.example.pet_care_api.models.OrderStatus;
 import com.example.pet_care_api.service.OrderService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +25,7 @@ public class OrderController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public OrderResponseDTO createOrder(@RequestParam Long dealerId,
+                                        @Valid
                                         @RequestBody CreateOrderRequestDTO createOrderRequestDTO) {
        Order order = orderService.createOrder(dealerId, createOrderRequestDTO);
        OrderResponseDTO orderResponseDTO = new OrderResponseDTO();

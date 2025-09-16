@@ -4,6 +4,7 @@ import com.example.pet_care_api.controllers.dto.request.CreateStockRequestDTO;
 import com.example.pet_care_api.controllers.dto.response.StockResponseDTO;
 import com.example.pet_care_api.models.Stock;
 import com.example.pet_care_api.service.StockService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,6 +24,7 @@ public class StockController {
     @ResponseStatus(HttpStatus.CREATED)
     public StockResponseDTO createStock(@RequestParam Long petClinicId,
                                         @RequestParam Long stockCategoryId,
+                                        @Valid
                                         @RequestBody CreateStockRequestDTO createStockRequestDTO) {
         Stock stock = stockService.createStock(petClinicId,stockCategoryId,createStockRequestDTO);
 

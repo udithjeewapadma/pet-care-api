@@ -4,6 +4,7 @@ import com.example.pet_care_api.controllers.dto.request.CreateDoctorRequestDTO;
 import com.example.pet_care_api.controllers.dto.response.DoctorResponseDTO;
 import com.example.pet_care_api.models.Doctor;
 import com.example.pet_care_api.service.DoctorService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ public class DoctorController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public DoctorResponseDTO createDoctor(@RequestParam Long petClinicId,
+                                           @Valid
                                            @RequestBody CreateDoctorRequestDTO createDoctorRequestDTO) {
         Doctor doctor = doctorService.createDoctor(petClinicId,createDoctorRequestDTO);
 

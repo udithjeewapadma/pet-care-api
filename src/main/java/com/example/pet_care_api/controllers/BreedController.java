@@ -4,6 +4,7 @@ import com.example.pet_care_api.controllers.dto.request.CreateBreedRequestDTO;
 import com.example.pet_care_api.controllers.dto.response.BreedResponseDTO;
 import com.example.pet_care_api.models.Breed;
 import com.example.pet_care_api.service.BreedService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,6 +53,7 @@ public class BreedController {
 
     @PutMapping("/{breed-id}")
     public BreedResponseDTO updateBreed(@PathVariable("breed-id") Long id,
+                                        @Valid
                                         @RequestBody CreateBreedRequestDTO createBreedRequestDTO) {
 
         Breed breed = breedService.updateBreeById(id, createBreedRequestDTO);

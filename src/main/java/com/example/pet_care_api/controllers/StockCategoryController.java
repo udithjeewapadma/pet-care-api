@@ -4,6 +4,7 @@ import com.example.pet_care_api.controllers.dto.request.CreateStockCategoryReque
 import com.example.pet_care_api.controllers.dto.response.StockCategoryResponseDTO;
 import com.example.pet_care_api.models.StockCategory;
 import com.example.pet_care_api.service.StockCategoryService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ public class StockCategoryController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public StockCategoryResponseDTO createStockCategory(
+            @Valid
             @RequestBody CreateStockCategoryRequestDTO createStockCategoryRequestDTO) {
 
         StockCategory stockCategory= stockCategoryService.createStockCategory(createStockCategoryRequestDTO);
