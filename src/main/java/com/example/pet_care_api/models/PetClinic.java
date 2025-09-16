@@ -17,6 +17,14 @@ public class PetClinic {
     private String address;
     private String phoneNumber;
 
+    @Column(unique = true, nullable = false)
+    private String username;
+
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.ROLE_ADMIN;
+
     @OneToMany(mappedBy = "petClinic", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Doctor> doctors;
 

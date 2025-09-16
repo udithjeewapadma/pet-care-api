@@ -17,6 +17,15 @@ public class PetOwner {
     private String address;
     private String phoneNumber;
 
+    @Column(unique = true, nullable = false)
+    private String username;
+
+    private String password;
+
+
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.ROLE_USER;
+
     @OneToMany(mappedBy = "petOwner",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Pet> pets;
 }
